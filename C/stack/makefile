@@ -2,7 +2,7 @@ CC=gcc
 FLAGS=-g #-O3
 OUTFILE=a.out
 DEPS = stack.h ../error.h
-OBJ = main.o stack.o ../error.o
+OBJ = driver.o stack.o ../error.o
 
 #Create object files
 %.o: %.c $(DEPS)
