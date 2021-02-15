@@ -1,8 +1,8 @@
 CC=gcc
 FLAGS=-g #-O3
 OUTFILE=a.out
-DEPS = stack.h
-OBJ = main.o stack.o
+DEPS = stack.h ../error.h
+OBJ = main.o stack.o ../error.o
 
 #Create object files
 %.o: %.c $(DEPS)
@@ -13,4 +13,4 @@ all: $(OBJ)
 	$(CC) $(FLAGS) $^ -o $(OUTFILE)
 
 clean:
-	rm *.o $(OUTFILE)
+	rm *.o ../*.o $(OUTFILE)

@@ -1,7 +1,8 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "stack.h"
+#include "../error.h"
 
 Stack* new_stack(void)
 {
@@ -156,13 +157,6 @@ bool expand_capacity(Stack* stack, int new_capacity)
 	stack->capacity = new_capacity;
 
 	return true;
-}
-
-//TODO REFACTOR TO DIFFERENT HEADER?
-void exit_with_error(char* message)
-{
-	printf("ERROR: %s\n", message);
-	exit(EXIT_FAILURE);
 }
 
 void dump(Stack* stack)
