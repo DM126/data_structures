@@ -38,16 +38,17 @@ bool push(Stack* stack, int value);
 int pop(Stack* stack);
 
 //Returns the value on top of the stack, without removing it.
-//Exits program if stack is empty.
+//Exits program if stack is null or empty.
 int peek(Stack* stack);
 
 //Returns true if the stack is null or has no items TODO NULL?
 bool isEmpty(Stack* stack);
 
-//Returns true if the stack's size is equal to its capacity
+//Returns true if the stack's size is equal to its capacity TODO NULL?
 bool isFull(Stack* stack);
 
-//Removes all items from the stack
+//Removes all items from the stack.
+//Exits the program if the stack is null.
 void clear(Stack* stack);
 
 //Expands the capacity of the stack.
