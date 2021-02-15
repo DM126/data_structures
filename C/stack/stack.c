@@ -52,6 +52,8 @@ Stack* copy_stack(Stack* other)
 	{
 		stack->array[i] = other->array[i];
 	}
+
+	return stack;
 }
 
 

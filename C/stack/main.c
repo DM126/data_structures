@@ -56,8 +56,30 @@ int main()
 	assert(peek(stack) == 100);
 	pop(stack);
 
+	//Test copy
+	for(int i = 0; i < 5; i++)
+	{
+		push(stack, i);
+	}
+	Stack* stack3 = copy_stack(stack);
+	assert(stack->size == stack3->size);
+	assert(stack->capacity == stack3->capacity);
+	for(int i = 0; i < 5; i++)
+	{
+		assert(stack->array[i] == stack3->array[i]);
+	}
+	assert(stack->array != stack3->array); //make sure deep copy is done
+	pop(stack);
+	assert(peek(stack3) == 4);
+	assert(peek(stack) != peek(stack3));
+	assert(stack->size != stack3->size);
+	push(stack3, 5);
+	assert(peek(stack) != 5);
+	assert(peek(stack) != peek(stack3));
+
 	delete_stack(stack);
 	delete_stack(stack2);
+	delete_stack(stack3);
 
 	printf("All tests ran successfully!\n");
 	return 0;
