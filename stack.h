@@ -33,9 +33,11 @@ Stack* copy_stack(Stack* other);
 //Returns true if the value was successfully added, false otherwise.
 bool push(Stack* stack, int value);
 
+//Remove an item from the stack and returns its value.
+//Exits the program if stack is null or empty.
 int pop(Stack* stack);
 
-//Returns the value on top of the stack.
+//Returns the value on top of the stack, without removing it.
 //Exits program if stack is empty.
 int peek(Stack* stack);
 
