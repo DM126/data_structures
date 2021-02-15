@@ -1,4 +1,4 @@
-#include <stddef.h>
+#include <stdlib.h>
 
 #include "stack.h"
 
@@ -12,7 +12,7 @@ Stack* new_stack_with_capacity(int initial_capacity)
 	Stack* stack = malloc(sizeof(Stack));
 	if (stack == NULL)
 	{
-		return NULL;
+		exit(EXIT_FAILURE);
 	}
 
 	stack->size = 0;
@@ -22,11 +22,13 @@ Stack* new_stack_with_capacity(int initial_capacity)
 	if (stack->array == NULL)
 	{
 		free(stack);
-		return NULL;
+		exit(EXIT_FAILURE);
 	}
+
+	return stack;
 }
 
-void destroy_stack(Stack* stack)
+void delete_stack(Stack* stack)
 {
 	free(stack->array);
 	free(stack);
@@ -40,21 +42,18 @@ Stack* copy_stack(Stack* other)
 	}
 
 	Stack* stack = new_stack_with_capacity(other->capacity);
-	if (stack != NULL)
+
+	stack->size = other->size;
+	for (int i = 0; i < stack->size; i++)
 	{
-		stack->size = other->size;
-		for (int i = 0; i < stack->size; i++)
-		{
-			stack->array[i] = other->array[i];
-		}
+		stack->array[i] = other->array[i];
 	}
-	
 }
 
 
 bool push(Stack* stack, int value)
 {
-
+	
 }
 
 int pop(Stack* stack)
@@ -79,5 +78,5 @@ void clear(Stack* stack)
 
 bool expand_capacity(Stack* stack, int new_capacity)
 {
-	
+
 }
