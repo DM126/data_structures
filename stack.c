@@ -76,7 +76,17 @@ bool push(Stack* stack, int value)
 
 int pop(Stack* stack)
 {
+	if (stack == NULL)
+	{
+		exit_with_error("pop - stack is null");
+	}
+	else if (isEmpty(stack))
+	{
+		exit_with_error("pop - stack is empty");
+	}
 
+	stack->size--;
+	return stack->array[stack->size];
 }
 
 int peek(Stack* stack)

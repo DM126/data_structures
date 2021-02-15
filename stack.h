@@ -7,8 +7,8 @@
 
 struct Stack_struct
 {
-	int size;
-	int capacity;
+	int size; //number of items in the stack, signifies next index to push to
+	int capacity; //capacity of the array
 	int* array;
 };
 typedef struct Stack_struct Stack;
