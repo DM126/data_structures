@@ -1,5 +1,8 @@
 //A stack of ints
 
+#ifndef STACK_H
+#define STACK_H
+
 #include "stdbool.h"
 
 struct Stack_struct
@@ -11,7 +14,7 @@ struct Stack_struct
 typedef struct Stack_struct Stack;
 
 
-const int DEFAULT_CAPACITY = 10; //starting capacity if none specified
+static const int DEFAULT_CAPACITY = 10; //starting capacity if none specified
 
 //Create a new stack with either the default capacity or a specified one.
 //Will never return NULL, Exits if malloc fails.
@@ -31,3 +34,5 @@ int peek(Stack* stack);
 bool isEmpty(Stack* stack);
 void clear(Stack* stack);
 bool expand_capacity(Stack* stack, int new_capacity);
+
+#endif
