@@ -62,7 +62,7 @@ bool push(Stack* stack, int value)
 {
 	if (stack == NULL)
 	{
-		exit_with_error("push - pushing to a null stack");
+		exit_with_error("push - stack is null");
 	}
 
 	//double the capacity if full
@@ -94,9 +94,13 @@ int pop(Stack* stack)
 
 int peek(Stack* stack)
 {
-	if (isEmpty(stack))
+	if (stack == NULL)
 	{
-		exit_with_error("peek - peeking at an empty stack");
+		exit_with_error("pop - stack is null");
+	}
+	else if (isEmpty(stack))
+	{
+		exit_with_error("peek - stack is empty");
 	}
 
 	return stack->array[stack->size - 1];
