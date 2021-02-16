@@ -3,15 +3,8 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "stdbool.h"
-
-typedef struct Node_struct Node;
-
-struct Node_struct
-{
-	int data;
-	Node* next;
-};
+#include <stdbool.h>
+#include "node.h"
 
 struct Queue_struct
 {
