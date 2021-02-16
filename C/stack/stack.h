@@ -56,9 +56,6 @@ void clear(Stack* stack);
 //Exits program if malloc fails.
 bool expand_capacity(Stack* stack, int new_capacity);
 
-//Prints an error message and exits the program
-void exit_with_error(char* message);
-
 //Print the stack's info, used for debugging
 void dump(Stack* stack);
 
