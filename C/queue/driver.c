@@ -59,23 +59,26 @@ int main()
 
 
 	//Test copy
-	// for(int i = 0; i < 5; i++)
-	// {
-	// 	enqueue(queue, i);
-	// }
-	// Queue* queue2 = copy_queue(queue);
-	// assert(queue->size == queue2->size);
-	// assert(queue->array != queue2->array); //make sure deep copy is done
-	// dequeue(queue);
-	// assert(peek(queue2) == 4);
-	// assert(peek(queue) != peek(queue2));
-	// assert(queue->size != queue2->size);
-	// enqueue(queue2, 5);
-	// assert(peek(queue) != 5);
-	// assert(peek(queue) != peek(queue2));
+	for(int i = 0; i < 5; i++)
+	{
+		enqueue(queue, i);
+	}
+	Queue* queue2 = copy_queue(queue);
+	assert(queue->size == queue2->size);
+	assert(queue->head != queue2->head); //make sure deep copy is done
+	dequeue(queue);
+	assert(queue->size != queue2->size);
+	assert(dequeue(queue2) == 0);
+	enqueue(queue2, 5);
+	for (int i = 1; i < 5; i++)
+	{
+		assert(dequeue(queue) == dequeue(queue2));
+	}
+	assert(isEmpty(queue));
+	assert(peek(queue2) == 5);
 
 	delete_queue(queue);
-	// delete_queue(queue2);
+	delete_queue(queue2);
 
 	printf("All tests ran successfully!\n");
 	return 0;

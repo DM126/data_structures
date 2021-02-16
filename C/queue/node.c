@@ -13,6 +13,8 @@ Node* new_node(int value)
 
 	node->data = value;
 	node->next = NULL;
+
+	return node;
 }
 
 void delete_node(Node* node)
@@ -26,7 +28,15 @@ void delete_node(Node* node)
 	free(node);
 }
 
-Node* copy_node(Node* node)
+Node* copy_node(Node* other)
 {
+	if (other == NULL)
+	{
+		return NULL;
+	}
 
+	Node* node = new_node(other->data);
+	node->next = copy_node(other->next);
+
+	return node;
 }

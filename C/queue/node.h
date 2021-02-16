@@ -17,7 +17,7 @@ Node* new_node(int value);
 //Frees a node and all its subsequent nodes
 void delete_node(Node* node);
 
-//Performs a deep copy of a node
+//Performs a deep copy of a node and all its subsequent nodes
 Node* copy_node(Node* node);
 
 #endif

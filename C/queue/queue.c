@@ -15,6 +15,8 @@ Queue* new_queue(void)
 	queue->size = 0;
 	queue->head = NULL;
 	queue->tail = NULL;
+
+	return queue;
 }
 
 void delete_queue(Queue* queue)
@@ -28,7 +30,40 @@ void delete_queue(Queue* queue)
 
 Queue* copy_queue(Queue* other)
 {
+	if (other == NULL)
+	{
+		return NULL;
+	}
 
+	Queue* queue = new_queue();
+	Node* curr = other->head;
+	while (curr != NULL)
+	{
+		enqueue(queue, curr->data);
+		curr = curr->next;
+	}
+
+	return queue;
+
+	//More complicated way of doing it, but potentially faster.
+	//Both ways are O(n), but enqueueing may have more overhead.
+	//Could also use copy_node, but requires iterating through again to set tail.
+	//TODO Benchmark this:
+	// Node* curr1 = new_node(other->head->data);
+	// Node* curr2 = other->head;
+	// queue->head = curr1;
+	// queue->tail = curr1;
+	// queue->size = other->size;
+	// while (curr1 != NULL)
+	// {
+	// 	curr1->next = new_node(curr2->next);
+	// 	curr1 = curr1->next;
+	// 	if (curr1 != NULL)
+	// 	{
+	// 		queue->tail = curr1;
+	// 		curr2 = curr2->next;
+	// 	}
+	// }
 }
 
 
@@ -53,6 +88,7 @@ bool enqueue(Queue* queue, int value)
 	}
 
 	queue->size++;
+	return true;
 }
 
 int dequeue(Queue* queue)
@@ -74,7 +110,7 @@ int dequeue(Queue* queue)
 
 	if (queue->head == NULL)
 	{
-		queue->tail == NULL;
+		queue->tail = NULL;
 	}
 
 	return value;
