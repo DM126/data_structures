@@ -25,36 +25,37 @@ int main()
 	assert(queue->size == 100);
 
 	//test dequeue, and enqueue after dequeue
-	// assert(dequeue(queue) == 0);
-	// assert(peek(queue) == 1);
-	// assert(queue->size == 99);
-	// enqueue(queue, 100);
-	// assert(dequeue(queue) == 0);
-	// assert(peek(queue) == 1);
-	// assert(queue->size == 100);
+	assert(dequeue(queue) == 0);
+	assert(peek(queue) == 1);
+	assert(queue->size == 99);
+	enqueue(queue, 100);
+	assert(queue->size == 100);
+	assert(dequeue(queue) == 1);
+	assert(peek(queue) == 2);
+	assert(queue->size == 99);
 
-	// //dequeue until empty
-	// for (int i = 0; i < 100; i++)
-	// {
-	// 	assert(dequeue(queue) == i + 1);
-	// }
-	// assert(isEmpty(queue));
-	// enqueue(queue, 200);
-	// assert(!isEmpty(queue));
-	// assert(peek(queue) == 200);
-	// dequeue(queue);
+	//dequeue until empty
+	for (int i = 2; i <= 100; i++)
+	{
+		assert(dequeue(queue) == i);
+	}
+	assert(isEmpty(queue));
+	enqueue(queue, 200);
+	assert(!isEmpty(queue));
+	assert(peek(queue) == 200);
+	dequeue(queue);
 
-	// //test clear
-	// for (int i = 100; i < 150; i++)
-	// {
-	// 	enqueue(queue, i);
-	// }
-	// clear(queue);
-	// assert(isEmpty(queue));
-	// enqueue(queue, 10);
-	// assert(!isEmpty(queue));
-	// assert(peek(queue) == 10);
-	// assert(dequeue(queue) == 10);
+	//test clear
+	for (int i = 100; i < 150; i++)
+	{
+		enqueue(queue, i);
+	}
+	clear(queue);
+	assert(isEmpty(queue));
+	enqueue(queue, 10);
+	assert(!isEmpty(queue));
+	assert(peek(queue) == 10);
+	assert(dequeue(queue) == 10);
 
 
 	//Test copy

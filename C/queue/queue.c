@@ -57,7 +57,27 @@ bool enqueue(Queue* queue, int value)
 
 int dequeue(Queue* queue)
 {
+	if (queue == NULL)
+	{
+		exit_with_error("dequeue - queue is null");
+	}
+	else if (isEmpty(queue))
+	{
+		exit_with_error("dequeue - queue is empty");
+	}
 
+	int value = queue->head->data;
+	Node* temp = queue->head;
+	queue->head = queue->head->next;
+	free(temp);
+	queue->size--;
+
+	if (queue->head == NULL)
+	{
+		queue->tail == NULL;
+	}
+
+	return value;
 }
 
 int peek(Queue* queue)
