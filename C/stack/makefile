@@ -1,5 +1,5 @@
 CC=gcc
-FLAGS=-g #-O3
+FLAGS=-g -Wall #-O3
 OUTFILE=a.out
 DEPS = stack.h ../error.h
 OBJ = driver.o stack.o ../error.o

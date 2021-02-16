@@ -1,5 +1,5 @@
 CC=gcc
-FLAGS=-g #-O3
+FLAGS=-g -Wall #-O3
 OUTFILE=a.out
 DEPS = node.h queue.h ../error.h
 OBJ = driver.o node.o queue.o ../error.o
