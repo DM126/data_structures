@@ -47,6 +47,8 @@ int get_index(Vector* vector, int index);
 int get_back(Vector* vector);
 int get_front(Vector* vector);
 
+//TODO add/get/remove a range within the array
+
 //Returns true if the vector is null or has no items TODO NULL?
 bool isEmpty(Vector* vector);
 
