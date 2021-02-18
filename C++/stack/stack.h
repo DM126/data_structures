@@ -42,7 +42,7 @@ public:
 	void clear();
 
 	//Expands the capacity of the stack.
-	//Throws invalid_argument if new_capacity is <= to the old capacity //TODO TRUNCATE?
+	//Returns false if new_capacity is <= to the old capacity //TODO TRUNCATE? EXCEPTION?
 	bool expandCapacity(int new_capacity);
 
 	//Print the stack's info, used for debugging
@@ -126,7 +126,7 @@ T Stack<T>::pop()
 {
 	if (isEmpty())
 	{
-		throw std::underflow_error();
+		throw std::underflow_error("Stack::pop(): stack is empty");
 	}
 
 	size--;
@@ -138,7 +138,7 @@ T Stack<T>::peek() const
 {
 	if (isEmpty())
 	{
-		throw std::out_of_range();
+		throw std::out_of_range("Stack::peek(): stack is empty");
 	}
 
 	return array[size - 1];
