@@ -1,7 +1,7 @@
 CC=g++
 FLAGS=-g -Wall #-O3
 OUTFILE=a.out
-DEPS = stack.h
+DEPS = stack.hpp
 OBJ = driver.o
 
 #Create object files

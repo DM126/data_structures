@@ -1,7 +1,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "stack.h"
+#include "stack.hpp"
 
 //Test deep copy for copy constructor and assignment operator.
 //Stacks should be initialized by pushing 0 through 4 onto them.
