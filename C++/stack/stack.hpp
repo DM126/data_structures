@@ -1,7 +1,7 @@
-//templated stack
+//templated array implementation of a stack
 
-#ifndef STACK_H
-#define STACK_H
+#ifndef STACK_HPP
+#define STACK_HPP
 
 #include <exception>
 #include <iostream>
