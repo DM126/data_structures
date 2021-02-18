@@ -5,6 +5,7 @@
 
 #include <exception>
 #include <iostream>
+#include <utility>
 
 template <typename T>
 class Stack
@@ -14,7 +15,7 @@ public:
 	Stack<T>(int initial_capacity);
 	Stack<T>(const Stack<T>& other);
 	~Stack<T>();
-	const Stack<T>& operator=(const Stack<T>& rhs);
+	Stack<T>& operator=(Stack<T> rhs); //uses copy swap idiom
 
 	//Adds an item to the stack.
 	//If the stack is at capacity it will be expanded.
@@ -86,23 +87,12 @@ Stack<T>::Stack(const Stack<T>& other)
 	}
 }
 
-//TODO TEST WITH COPY SWAP
 template <typename T>
-const Stack<T>& Stack<T>::operator=(const Stack<T>& rhs)
+Stack<T>& Stack<T>::operator=(Stack<T> rhs)
 {
-	if (this != &rhs)
-	{
-		delete[] array;
-
-		size = rhs.size;
-		capacity = rhs.capacity;
-		array = new T[capacity];
-
-		for (int i = 0; i < size; i++)
-		{
-			array[i] = rhs.array[i];
-		}
-	}
+	size = rhs.size;
+	capacity = rhs.capacity;
+	std::swap(array, rhs.array);
 
 	return *this;
 }
