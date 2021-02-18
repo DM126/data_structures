@@ -87,7 +87,7 @@ int main()
 	stack.push(10);
 	stack.pop();
 
-	printf("All tests ran successfully!\n");
+	std::cout << "All tests ran successfully!" << std::endl;
 	return 0;
 }
 
