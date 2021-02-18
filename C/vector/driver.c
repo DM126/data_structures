@@ -38,7 +38,7 @@ int main()
 		assert(vector->array[i] == i);
 	}
 
-	//todo test add_front and add_index
+	//todo test add_front, add_index, and remove function
 
 	delete_vector(vector);
 	delete_vector(vector2);

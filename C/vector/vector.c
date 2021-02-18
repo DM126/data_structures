@@ -4,9 +4,13 @@
 #include "vector.h"
 #include "../error.h"
 
-//generic function to do adding logic
-//will not check for null vector
+//Generic functions to do adding and removing logic.
+//Will not check for null/empty vectors or index bounds,
+//must be done before calling.
+//Returns true if added successfully:
 static bool add_item(Vector* vector, int index, int value);
+//Returns value removed:
+static int remove_item(Vector* vector, int index);
 
 Vector* new_vector(void)
 {
@@ -117,17 +121,63 @@ static bool add_item(Vector* vector, int index, int value)
 
 int remove_index(Vector* vector, int index)
 {
+	if (vector == NULL)
+	{
+		exit_with_error("remove_index - vector is null");
+	}
+	else if (isEmpty(vector))
+	{
+		exit_with_error("remove_index - vector is empty");
+	}
+	else if (index < 0 || index >= vector->size)
+	{
+		exit_with_error("remove_index - index out of bounds");
+	}
 
+	return remove_item(vector, index);
 }
 
 int remove_back(Vector* vector)
 {
+	if (vector == NULL)
+	{
+		exit_with_error("remove_back - vector is null");
+	}
+	else if (isEmpty(vector))
+	{
+		exit_with_error("remove_back - vector is empty");
+	}
 
+	return remove_item(vector, vector->size - 1);
 }
 
 int remove_front(Vector* vector)
 {
+	if (vector == NULL)
+	{
+		exit_with_error("remove_front - vector is null");
+	}
+	else if (isEmpty(vector))
+	{
+		exit_with_error("remove_back - vector is empty");
+	}
 
+	return remove_item(vector, 0);
+}
+
+static int remove_item(Vector* vector, int index)
+{
+	int value = vector->array[index];
+
+	//move everything forward
+	for (int i = index; i < vector->size - 1; i++)
+	{
+		vector->array[i] = vector->array[i+1];
+	}
+
+	vector->size--;
+
+	return value;
 }
 
 int get_index(Vector* vector, int index)
