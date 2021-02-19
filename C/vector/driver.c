@@ -38,10 +38,58 @@ int main()
 		assert(vector->array[i] == i);
 	}
 
-	//todo test add_front, add_index, and remove function
+	//test clear
+	clear(vector);
+	assert(isEmpty(vector));
+	add_back(vector, 10);
+	assert(!isEmpty(vector));
+	//test get and add functions
+	assert(get_index(vector, 0) == 10);
+	assert(get_front(vector) == 10);
+	assert(get_back(vector) == 10);
+	add_back(vector, 20);
+	assert(get_front(vector) == 10);
+	assert(get_back(vector) == 20);
+	add_front(vector, 30);
+	assert(get_front(vector) == 30);
+	assert(get_index(vector, 1) == 10);
+	assert(get_back(vector) == 20);
+
+	//test remove functions
+	clear(vector);
+	for (int i = 0; i < 10; i++)
+	{
+		add_back(vector, i);
+	}
+	assert(remove_index(vector, 3) == 3);
+	assert(remove_front(vector) == 0);
+	assert(remove_back(vector) == 9);
+	clear(vector);
+
+	//test copy
+	for(int i = 0; i < 5; i++)
+	{
+		add_back(vector, i);
+	}
+	Vector* vector3 = copy_vector(vector);
+	assert(vector->size == vector3->size);
+	assert(vector->capacity == vector3->capacity);
+	for(int i = 0; i < 5; i++)
+	{
+		assert(vector->array[i] == vector3->array[i]);
+	}
+	assert(vector->array != vector3->array); //make sure deep copy is done
+	remove_back(vector);
+	assert(get_back(vector3) == 4);
+	assert(get_back(vector) != get_back(vector3));
+	assert(vector->size != vector3->size);
+	add_front(vector3, 5);
+	assert(get_front(vector) != 5);
+	assert(get_front(vector3) == 5);
 
 	delete_vector(vector);
 	delete_vector(vector2);
+	delete_vector(vector3);
 
 	printf("All tests ran successfully!\n");
 	return 0;
