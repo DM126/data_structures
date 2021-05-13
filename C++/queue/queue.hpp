@@ -30,6 +30,9 @@ public:
 	//Returns true if the queue contains no items
 	bool isEmpty() const;
 
+	//Returns the number of items in the queue
+	int getSize() const;
+
 	//Removes all items from the queue.
 	void clear();
 
@@ -63,7 +66,7 @@ Queue<T>::Queue(const Queue& other)
 	head = nullptr;
 	tail = nullptr;
 
-	Node<T>* curr = other->head;
+	Node<T>* curr = other.head;
 	while (curr != nullptr)
 	{
 		enqueue(curr->data);
@@ -84,7 +87,7 @@ Queue<T>& Queue<T>::operator=(Queue<T> rhs)
 template <typename T>
 void Queue<T>::enqueue(const T& data)
 {
-	Node<T>* newnode(data);
+	Node<T>* newnode = new Node<T>(data);
 
 	if (isEmpty())
 	{
@@ -137,6 +140,12 @@ template <typename T>
 bool Queue<T>::isEmpty() const
 {
 	return size == 0;
+}
+
+template <typename T>
+int Queue<T>::getSize() const
+{
+	return size;
 }
 
 template <typename T>

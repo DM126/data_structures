@@ -9,7 +9,7 @@ template <typename T>
 class Node
 {
 public:
-	Node(T value);
+	Node(const T& value);
 	Node(const Node<T>& other);
 	~Node();
 	Node<T>& operator=(Node<T> rhs); //uses copy swap idiom
@@ -19,7 +19,7 @@ public:
 };
 
 template <typename T>
-Node<T>::Node(T value)
+Node<T>::Node(const T& value)
 {
 	data = value;
 	next = nullptr;
