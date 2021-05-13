@@ -59,7 +59,7 @@ int main()
 	{
 		stack.push(i);
 	}
-	for(int i = 4; i <= 0; i--)
+	for(int i = 4; i >= 0; i--)
 	{
 		assert(stack.pop() == i);
 	}
