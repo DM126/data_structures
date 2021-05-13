@@ -41,6 +41,19 @@ public:
 	static const int DEFAULT_CAPACITY = 10;
 
 protected:
+	//Adds an item to the collection at the specified index,
+	//pushes everything behind it back
+	bool add(int index, const T& value);
+	
+	//Removes an item from the collection and returns its value,
+	//pushes everything behind it forward
+	//Throws underflow_error if empty, or out_of_range if index is out of bounds
+	T remove(int index);
+
+	//Returns the item at teh specified index, without removing it.
+	//Throws out_of_range if index is out of bounds
+	T get(int index) const;
+
 	int size; //number of items in the collection, signifies next index to add to
 	int capacity; //capacity of the array
 	T* array;
@@ -84,6 +97,67 @@ ArrayCollection<T>& ArrayCollection<T>::operator=(ArrayCollection<T> rhs)
 	std::swap(array, rhs.array);
 
 	return *this;
+}
+
+template <typename T>
+bool ArrayCollection<T>::add(int index, const T& value)
+{
+	if (index < 0 || index > size)
+	{
+		throw std::out_of_range("ArrayCollection::add(): index out of bounds: " + std::to_string(index));
+	}
+
+	//double the capacity if full
+	if (isFull())
+	{
+		expandCapacity(capacity * 2);
+	}
+
+	//push everything back
+	for (int i = size; i > index; i--)
+	{
+		array[i] = array[i-1];
+	}
+	array[index] = value;
+	size++;
+
+	return true;
+}
+
+template <typename T>
+T ArrayCollection<T>::remove(int index)
+{
+	if (isEmpty())
+	{
+		throw std::underflow_error("ArrayCollection::remove(): collection is empty");
+	}
+	else if (index < 0 || index >= size)
+	{
+		throw std::out_of_range("ArrayCollection::remove(): index out of bounds: " + std::to_string(index));
+	}
+
+	int value = array[index];
+
+	//move everything forward
+	for (int i = index; i < size - 1; i++)
+	{
+		array[i] = array[i+1];
+	}
+
+	size--;
+
+	return value;
+}
+
+template <typename T>
+T ArrayCollection<T>::get(int index) const
+{
+	if (index < 0 || index >= size)
+	{
+		throw std::out_of_range("ArrayCollection::get(): index out of bounds: " + std::to_string(index));
+	}
+
+	return array[index];
 }
 
 template <typename T>

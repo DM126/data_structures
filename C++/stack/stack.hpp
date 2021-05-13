@@ -35,38 +35,19 @@ Stack<T>::Stack(int initial_capacity) : ArrayCollection<T>(initial_capacity) {}
 template <typename T>
 bool Stack<T>::push(const T& value)
 {
-	if (this->isFull())
-	{
-		this->expandCapacity(this->capacity * 2);
-	}
-
-	this->array[this->size] = value;
-	this->size++;
-
-	return true;
+	return this->add(this->size, value);
 }
 
 template <typename T>
 T Stack<T>::pop()
 {
-	if (this->isEmpty())
-	{
-		throw std::underflow_error("Stack::pop(): stack is empty");
-	}
-
-	this->size--;
-	return this->array[this->size];
+	return this->remove(this->size - 1);
 }
 
 template <typename T>
 T Stack<T>::peek() const
 {
-	if (this->isEmpty())
-	{
-		throw std::out_of_range("Stack::peek(): stack is empty");
-	}
-
-	return this->array[this->size - 1];
+	return this->get(this->size - 1);
 }
 
 #endif

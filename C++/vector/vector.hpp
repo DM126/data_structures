@@ -44,26 +44,7 @@ Vector<T>::Vector(int initial_capacity) : ArrayCollection<T>(initial_capacity) {
 template <typename T>
 bool Vector<T>::add(int index, const T& value)
 {
-	if (index < 0 || index > this->size)
-	{
-		throw std::out_of_range("Vector::add(): index out of bounds: " + std::to_string(index));
-	}
-
-	//double the capacity if full
-	if (this->isFull())
-	{
-		this->expandCapacity(this->capacity * 2);
-	}
-
-	//push everything back
-	for (int i = this->size; i > index; i--)
-	{
-		this->array[i] = this->array[i-1];
-	}
-	this->array[index] = value;
-	this->size++;
-
-	return true;
+	return ArrayCollection<T>::add(index, value);
 }
 
 template <typename T>
@@ -79,30 +60,10 @@ bool Vector<T>::add_front(const T& value)
 }
 
 
-//TODO use helper function like in C vector?
 template <typename T>
 T Vector<T>::remove(int index)
 {
-	if (this->isEmpty())
-	{
-		throw std::underflow_error("Vector::remove(): Vector is empty");
-	}
-	else if (index < 0 || index >= this->size)
-	{
-		throw std::out_of_range("Vector::remove(): index out of bounds: " + std::to_string(index));
-	}
-
-	int value = this->array[index];
-
-	//move everything forward
-	for (int i = index; i < this->size - 1; i++)
-	{
-		this->array[i] = this->array[i+1];
-	}
-
-	this->size--;
-
-	return value;
+	return ArrayCollection<T>::remove(index);
 }
 
 template <typename T>
@@ -121,24 +82,19 @@ T Vector<T>::remove_front()
 template <typename T>
 T Vector<T>::get(int index) const
 {
-	if (index < 0 || index >= this->size)
-	{
-		throw std::out_of_range("Vector::get(): index out of bounds: " + std::to_string(index));
-	}
-
-	return this->array[index];
+	return ArrayCollection<T>::get(index);
 }
 
 template <typename T>
 T Vector<T>::get_back() const
 {
-	return get(this->size - 1);
+	return this->get(this->size - 1);
 }
 
 template <typename T>
 T Vector<T>::get_front() const
 {
-	return get(0);
+	return this->get(0);
 }
 
 #endif
