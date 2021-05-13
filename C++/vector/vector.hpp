@@ -25,15 +25,15 @@ public:
 
 	//Remove an item from the vector and returns its value.
 	//Exits the program if vector is empty, or if index is invalid.
-	int remove(int index);
-	int remove_back();
-	int remove_front();
+	T remove(int index);
+	T remove_back();
+	T remove_front();
 
 	//Returns a value at a specific index, without removing it.
 	//Exits program if vector is empty, or if index is invalid.
-	int get(int index) const;
-	int get_back() const;
-	int get_front() const;
+	T get(int index) const;
+	T get_back() const;
+	T get_front() const;
 
 	//TODO add/get/remove a range within the array
 
@@ -52,124 +52,209 @@ public:
 
 	//Print the vector's info, used for debugging
 	void dump() const;
+
+private:
+	int size; //number of items in the vector, signifies next index to add to
+	int capacity; //capacity of the array
+	T* array;
+
+	static const int DEFAULT_CAPACITY = 10; //starting capacity if none specified
 };
 
+//TODO duplicated code with stack - make a parent class?
 template <typename T>
-Vector<T>::Vector()
-{
-
-}
+Vector<T>::Vector() : Vector(DEFAULT_CAPACITY) {}
 
 template <typename T>
 Vector<T>::Vector(int initial_capacity)
 {
-
-}
-
-template <typename T>
-Vector<T>::Vector(const Vector<T>& other)
-{
-
+	size = 0;
+	capacity = initial_capacity;
+	array = new T[capacity];
 }
 
 template <typename T>
 Vector<T>::~Vector()
 {
+	delete[] array;
+}
 
+template <typename T>
+Vector<T>::Vector(const Vector<T>& other)
+{
+	size = other.size;
+	capacity = other.capacity;
+	array = new T[capacity];
+
+	for (int i = 0; i < size; i++)
+	{
+		array[i] = other.array[i];
+	}
 }
 
 template <typename T>
 Vector<T>& Vector<T>::operator=(Vector<T> rhs)
 {
+	size = rhs.size;
+	capacity = rhs.capacity;
+	std::swap(array, rhs.array);
 
+	return *this;
 }
 
 
 template <typename T>
 bool Vector<T>::add(int index, const T& value)
 {
+	if (index < 0 || index > size)
+	{
+		throw std::out_of_range("Vector::add(): index out of bounds");
+	}
 
+	//double the capacity if full
+	if (isFull())
+	{
+		expand_capacity(capacity * 2);
+	}
+
+	//push everything back
+	for (int i = size; i > index; i--)
+	{
+		array[i] = array[i-1];
+	}
+	array[index] = value;
+	size++;
+
+	return true;
 }
 
 template <typename T>
 bool Vector<T>::add_back(const T& value)
 {
-
+	return add(size, value);
 }
 
 template <typename T>
 bool Vector<T>::add_front(const T& value)
 {
+	return add(0, value);
+}
 
+//TODO use helper function like in C vector?
+template <typename T>
+T Vector<T>::remove(int index)
+{
+	if (isEmpty())
+	{
+		throw std::underflow_error("Vector::remove(): Vector is empty");
+	}
+	else if (index < 0 || index >= size)
+	{
+		throw std::out_of_range("Vector::remove(): index out of bounds");
+	}
+
+	int value = array[index];
+
+	//move everything forward
+	for (int i = index; i < size - 1; i++)
+	{
+		array[i] = array[i+1];
+	}
+
+	size--;
+
+	return value;
+}
+
+template <typename T>
+T Vector<T>::remove_back()
+{
+	return remove(size);
+}
+
+template <typename T>
+T Vector<T>::remove_front()
+{
+	return remove(0);
 }
 
 
 template <typename T>
-int Vector<T>::remove(int index)
+T Vector<T>::get(int index) const
 {
+	if (index < 0 || index >= size)
+	{
+		throw std::out_of_range("Vector::get(): index out of bounds");
+	}
 
+	return array[index];
 }
 
 template <typename T>
-int Vector<T>::remove_back()
+T Vector<T>::get_back() const
 {
-
+	return get(size);
 }
 
 template <typename T>
-int Vector<T>::remove_front()
+T Vector<T>::get_front() const
 {
-
-}
-
-
-template <typename T>
-int Vector<T>::get(int index) const
-{
-
-}
-
-template <typename T>
-int Vector<T>::get_back() const
-{
-
-}
-
-template <typename T>
-int Vector<T>::get_front() const
-{
-
+	return get(0);
 }
 
 
 template <typename T>
 bool Vector<T>::isEmpty() const
 {
-
+	return size == 0;
 }
 
 template <typename T>
 bool Vector<T>::isFull() const
 {
-
+	return size == capacity;
 }
 
 template <typename T>
 void Vector<T>::clear()
 {
-
+	size = 0;
 }
 
 template <typename T>
 bool Vector<T>::expand_capacity(int new_capacity)
 {
+	//TODO TRUNCATE IF NEW CAPACITY IS SMALLER?
+	if (new_capacity <= capacity)
+	{
+		return false;
+	}
 
+	T* new_array = new T[new_capacity];
+
+	//copy the values over
+	for (int i = 0; i < size; i++)
+	{
+		new_array[i] = array[i];
+	}
+
+	//replace the old array
+	delete[] array;
+	array = new_array;
+	capacity = new_capacity;
+
+	return true;
 }
 
 template <typename T>
 void Vector<T>::dump() const
 {
-
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << i << ": " << array[i] << "\n";
+	}
+	std::cout << "size: " << size << "\n";
+	std::cout << "capacity: " << capacity << std::endl;
 }
 
 #endif
