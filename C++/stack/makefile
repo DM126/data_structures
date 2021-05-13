@@ -1,7 +1,7 @@
 CC=g++
 FLAGS=-g -Wall #-O3
 OUTFILE=a.out
-DEPS = stack.hpp
+DEPS = stack.hpp ../array_collection.hpp
 OBJ = driver.o
 
 #Create object files
