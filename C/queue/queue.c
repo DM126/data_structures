@@ -161,13 +161,10 @@ void dump(Queue* queue)
 	else
 	{
 		Node* curr = queue->head;
-		int i = 0;
-		do
+		for (int i = 0; curr != NULL; i++, curr = curr->next)
 		{
 			printf("%d: %d\n", i, curr->data);
-			curr = queue->head->next;
 		}
-		while (curr != NULL);
 
 		printf("size: %d\n", queue->size);
 	}
