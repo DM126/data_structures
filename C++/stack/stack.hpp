@@ -64,7 +64,7 @@ template <typename T>
 Stack<T>::Stack(int initial_capacity)
 {
 	size = 0;
-	capacity = DEFAULT_CAPACITY;
+	capacity = initial_capacity;
 	array = new T[capacity];
 }
 
