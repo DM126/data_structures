@@ -71,4 +71,99 @@ Queue<T>::Queue(const Queue& other)
 	}
 }
 
+template <typename T>
+Queue<T>& Queue<T>::operator=(Queue<T> rhs)
+{
+	size = rhs.size;
+	std::swap(head, rhs.head);
+	std::swap(tail, rhs.tail);
+
+	return *this;
+}
+
+template <typename T>
+void Queue<T>::enqueue(const T& data)
+{
+	Node<T>* newnode(data);
+
+	if (isEmpty())
+	{
+		head = newnode;
+		tail = newnode;
+	}
+	else
+	{
+		tail->next = newnode;
+		tail = newnode;
+	}
+
+	size++;
+}
+
+template <typename T>
+T Queue<T>::dequeue()
+{
+	if (isEmpty())
+	{
+		throw std::underflow_error("Queue::dequeue(): queue is empty");
+	}
+
+	int value = head->data;
+	Node<T>* temp = head;
+	head = head->next;
+	delete temp;
+	size--;
+
+	if (head == nullptr)
+	{
+		tail = nullptr;
+	}
+
+	return value;
+}
+
+template <typename T>
+T Queue<T>::peek() const
+{
+	if (isEmpty())
+	{
+		throw std::out_of_range("Queue::peek(): queue is empty");
+	}
+
+	return head->data;
+}
+
+template <typename T>
+bool Queue<T>::isEmpty() const
+{
+	return size == 0;
+}
+
+template <typename T>
+void Queue<T>::clear()
+{
+	delete head;
+	size = 0;
+	head = tail = nullptr;
+}
+
+template <typename T>
+void Queue<T>::dump() const
+{
+	if (isEmpty())
+	{
+		std::cout << "Queue is empty." << std::endl;
+	}
+	else
+	{
+		Node<T>* curr = head;
+		for (int i = 0; curr != nullptr; i++, curr = curr->next)
+		{
+			std::cout << i << ": " << curr->data << "\n";
+		}
+
+		std::cout << "size: " << size << std::endl;
+	}
+}
+
 #endif
