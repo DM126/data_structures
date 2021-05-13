@@ -43,6 +43,12 @@ public:
 	//Returns true if the vector's size is equal to its capacity
 	bool isFull() const;
 
+	//Returns the number of items in the vector
+	int getSize() const;
+
+	//Returns the capacity of the array
+	int getCapacity() const;
+
 	//Removes all items from the vector.
 	void clear();
 
@@ -53,12 +59,13 @@ public:
 	//Print the vector's info, used for debugging
 	void dump() const;
 
+	//starting capacity if none specified
+	static const int DEFAULT_CAPACITY = 10;
+
 private:
 	int size; //number of items in the vector, signifies next index to add to
 	int capacity; //capacity of the array
 	T* array;
-
-	static const int DEFAULT_CAPACITY = 10; //starting capacity if none specified
 };
 
 //TODO duplicated code with stack - make a parent class?
@@ -108,7 +115,7 @@ bool Vector<T>::add(int index, const T& value)
 {
 	if (index < 0 || index > size)
 	{
-		throw std::out_of_range("Vector::add(): index out of bounds");
+		throw std::out_of_range("Vector::add(): index out of bounds: " + std::to_string(index));
 	}
 
 	//double the capacity if full
@@ -150,7 +157,7 @@ T Vector<T>::remove(int index)
 	}
 	else if (index < 0 || index >= size)
 	{
-		throw std::out_of_range("Vector::remove(): index out of bounds");
+		throw std::out_of_range("Vector::remove(): index out of bounds: " + std::to_string(index));
 	}
 
 	int value = array[index];
@@ -169,7 +176,7 @@ T Vector<T>::remove(int index)
 template <typename T>
 T Vector<T>::remove_back()
 {
-	return remove(size);
+	return remove(size - 1);
 }
 
 template <typename T>
@@ -184,7 +191,7 @@ T Vector<T>::get(int index) const
 {
 	if (index < 0 || index >= size)
 	{
-		throw std::out_of_range("Vector::get(): index out of bounds");
+		throw std::out_of_range("Vector::get(): index out of bounds: " + std::to_string(index));
 	}
 
 	return array[index];
@@ -193,7 +200,7 @@ T Vector<T>::get(int index) const
 template <typename T>
 T Vector<T>::get_back() const
 {
-	return get(size);
+	return get(size - 1);
 }
 
 template <typename T>
@@ -213,6 +220,18 @@ template <typename T>
 bool Vector<T>::isFull() const
 {
 	return size == capacity;
+}
+
+template <typename T>
+int Vector<T>::getSize() const
+{
+	return size;
+}
+
+template <typename T>
+int Vector<T>::getCapacity() const
+{
+	return capacity;
 }
 
 template <typename T>
