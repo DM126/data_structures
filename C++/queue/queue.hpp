@@ -111,9 +111,13 @@ T Queue<T>::dequeue()
 		throw std::underflow_error("Queue::dequeue(): queue is empty");
 	}
 
+	//move to the new head
 	int value = head->data;
 	Node<T>* temp = head;
 	head = head->next;
+
+	//delete the old head
+	temp->next = nullptr;
 	delete temp;
 	size--;
 
