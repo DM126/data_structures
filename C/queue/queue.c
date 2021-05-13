@@ -120,11 +120,11 @@ int peek(Queue* queue)
 {
 	if (queue == NULL)
 	{
-		exit_with_error("pop - queue is null");
+		exit_with_error("peek - queue is null");
 	}
 	else if (isEmpty(queue))
 	{
-		exit_with_error("pop - queue is empty");
+		exit_with_error("peek - queue is empty");
 	}
 
 	return queue->head->data;
