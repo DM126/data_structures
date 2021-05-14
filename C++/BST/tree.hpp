@@ -3,7 +3,6 @@
 #ifndef TREE_HPP
 #define TREE_HPP
 
-#include <vector>
 #include "treenode.hpp"
 
 template <typename T>
@@ -39,9 +38,9 @@ public:
 	void clear();
 
 	//Tree traversals, returns a vector determined by traversal order
-	vector<T> inorder() const;
-	vector<T> preorder() const;
-	vector<T> postorder() const;
+	std::vector<T> inorder() const;
+	std::vector<T> preorder() const;
+	std::vector<T> postorder() const;
 
 	//Print the tree's info, used for debugging
 	void dump() const;
@@ -50,5 +49,162 @@ private:
 	Node<T>* root;
 	int size;
 };
+
+template <typename T>
+Tree<T>::Tree()
+{
+	size = 0;
+	root = nullptr;
+}
+
+template <typename T>
+Tree<T>::~Tree()
+{
+	delete root;
+}
+
+template <typename T>
+Tree<T>::Tree(const Tree& other)
+{
+	size = other.size;
+	root = nullptr;
+
+	if (!other.isEmpty())
+	{
+		*root = *other.root;
+	}
+}
+
+template <typename T>
+Tree<T>& Tree<T>::operator=(Tree<T> rhs)
+{
+	size = rhs.size;
+	std::swap(root, rhs.root);
+
+	return *this;
+}
+
+template <typename T>
+bool Tree<T>::insert(const T& value)
+{
+	bool inserted = false;
+	if (isEmpty())
+	{
+		root = new Node<T>(value);
+		inserted = true;
+	}
+	else
+	{
+		inserted = root->insert(value);
+	}
+
+	if (inserted)
+	{
+		size++;
+	}
+
+	return inserted;
+}
+
+template <typename T>
+bool Tree<T>::find(const T& value) const
+{
+	if (isEmpty())
+	{
+		return false;
+	}
+
+	return root.find(value);
+}
+
+template <typename T>
+bool Tree<T>::remove(const T& value)
+{
+
+}
+
+template <typename T>
+T Tree<T>::peek() const
+{
+	if (isEmpty())
+	{
+		throw std::underflow_error("Tree::peek(): tree is empty");
+	}
+
+	return root->data;
+}
+
+template <typename T>
+bool Tree<T>::isEmpty() const
+{
+	return size == 0;
+}
+
+template <typename T>
+int Tree<T>::getSize() const
+{
+	return size;
+}
+
+template <typename T>
+void Tree<T>::clear()
+{
+	delete root;
+	root = nullptr;
+	size = 0;
+}
+
+template <typename T>
+std::vector<T> Tree<T>::inorder() const
+{
+	std::vector<T> items;
+
+	if (!isEmpty())
+	{
+		root->inorder(items);
+	}
+
+	return items;
+}
+
+template <typename T>
+std::vector<T> Tree<T>::preorder() const
+{
+	std::vector<T> items;
+
+	if (!isEmpty())
+	{
+		root->preorder(items);
+	}
+	
+	return items;
+}
+
+template <typename T>
+std::vector<T> Tree<T>::postorder() const
+{
+	std::vector<T> items;
+
+	if (!isEmpty())
+	{
+		root->postorder(items);
+	}
+	
+	return items;
+}
+
+template <typename T>
+void Tree<T>::dump() const
+{
+	if (isEmpty())
+	{
+		printf("tree is empty.\n");
+	}
+	else
+	{
+		root->dump();
+		printf("\nsize: %d\n", size);
+	}
+}
 
 #endif
