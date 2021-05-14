@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "tree.h"
 
@@ -113,6 +114,31 @@ int main()
 	delete_tree(copytree);
 	insert(tree, 10);
 	assert(peek(tree) != 10);
+
+	//test other traversals
+	//tree will look like this:
+	//      3
+	//  1       5
+	//0   2   4   6
+	int pre[] = {3, 1, 0, 2, 5, 4, 6};
+	int post[] = {0, 2, 1, 4, 6, 5, 3};
+	clear(tree);
+	insert(tree, 3);
+	insert(tree, 5);
+	insert(tree, 6);
+	insert(tree, 4);
+	insert(tree, 1);
+	insert(tree, 2);
+	insert(tree, 0);
+
+	int* preorder_array = preorder(tree);
+	int* postorder_array = postorder(tree);
+
+	assert(!memcmp(preorder_array, pre, 7*sizeof(int)));
+	assert(!memcmp(postorder_array, post, 7*sizeof(int)));
+
+	free(preorder_array);
+	free(postorder_array);
 
 	//TODO MORE TESTS
 
