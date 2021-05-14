@@ -106,6 +106,8 @@ int main()
 
 	//TODO MORE TESTS
 
+	delete_tree(tree);
+
 	printf("All tests ran successfully!\n");
 	return 0;
 }

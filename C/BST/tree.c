@@ -6,7 +6,7 @@
 
 Tree* new_tree(void)
 {
-	Tree* tree = malloc(sizeof(tree));
+	Tree* tree = malloc(sizeof(Tree));
 	if (tree == NULL)
 	{
 		exit_with_error("new_tree - Out of memory");
