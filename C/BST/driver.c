@@ -104,6 +104,16 @@ int main()
 	}
 	free(inorder_array);
 
+	//test copy
+	Tree* copytree = copy_tree(tree);
+	assert(peek(tree) == peek(copytree));
+	assert(tree->size == copytree->size);
+	delete(copytree, 0);
+	assert(peek(tree) == 0);
+	delete_tree(copytree);
+	insert(tree, 10);
+	assert(peek(tree) != 10);
+
 	//TODO MORE TESTS
 
 	delete_tree(tree);

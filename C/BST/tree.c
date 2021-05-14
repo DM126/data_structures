@@ -36,6 +36,7 @@ Tree* copy_tree(Tree* other)
 
 	Tree* tree = new_tree();
 	tree->root = copy_node(other->root);
+	tree->size = other->size;
 
 	return tree;
 }
