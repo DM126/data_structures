@@ -18,6 +18,6 @@ Node* new_node(int value);
 void delete_node(Node* node);
 
 //Performs a deep copy of a node and all its subsequent nodes
-Node* copy_node(Node* node);
+Node* copy_node(const Node* node);
 
 #endif

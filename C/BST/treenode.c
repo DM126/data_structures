@@ -30,7 +30,7 @@ void delete_node(Node* node)
 	free(node);
 }
 
-Node* copy_node(Node* other)
+Node* copy_node(const Node* other)
 {
 	if (other == NULL)
 	{
@@ -81,7 +81,7 @@ bool insert_node(Node* node, int value)
 	return inserted;
 }
 
-bool find_node(Node* node, int value)
+bool find_node(const Node* node, int value)
 {
 	bool found;
 	if (node == NULL)
@@ -172,7 +172,7 @@ int swap_minimum(Node* node, Node* parent)
 	return swap_minimum(node->left, node);
 }
 
-int inorder_node(Node* node, int* array, int current)
+int inorder_node(const Node* node, int* array, int current)
 {
 	if (node == NULL)
 	{
@@ -187,7 +187,7 @@ int inorder_node(Node* node, int* array, int current)
 	return current;
 }
 
-int preorder_node(Node* node, int* array, int current)
+int preorder_node(const Node* node, int* array, int current)
 {
 	if (node == NULL)
 	{
@@ -202,7 +202,7 @@ int preorder_node(Node* node, int* array, int current)
 	return current;
 }
 
-int postorder_node(Node* node, int* array, int current)
+int postorder_node(const Node* node, int* array, int current)
 {
 	if (node == NULL)
 	{

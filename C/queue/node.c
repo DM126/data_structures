@@ -28,7 +28,7 @@ void delete_node(Node* node)
 	free(node);
 }
 
-Node* copy_node(Node* other)
+Node* copy_node(const Node* other)
 {
 	if (other == NULL)
 	{

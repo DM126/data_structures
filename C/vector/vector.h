@@ -25,7 +25,7 @@ Vector* new_vector_with_capacity(int initial_capacity);
 void delete_vector(Vector* vector);
 
 //Returns a deep copy of the vector
-Vector* copy_vector(Vector* other);
+Vector* copy_vector(const Vector* other);
 
 
 //Adds a value to the vector.
@@ -43,17 +43,17 @@ int remove_front(Vector* vector);
 
 //Returns a value at a specific index, without removing it.
 //Exits program if vector is null or empty, or if index is invalid.
-int get_index(Vector* vector, int index);
-int get_back(Vector* vector);
-int get_front(Vector* vector);
+int get_index(const Vector* vector, int index);
+int get_back(const Vector* vector);
+int get_front(const Vector* vector);
 
 //TODO add/get/remove a range within the array
 
 //Returns true if the vector is null or has no items TODO NULL?
-bool isEmpty(Vector* vector);
+bool isEmpty(const Vector* vector);
 
 //Returns true if the vector's size is equal to its capacity TODO NULL?
-bool isFull(Vector* vector);
+bool isFull(const Vector* vector);
 
 //Removes all items from the vector.
 //Exits the program if the vector is null.
@@ -65,6 +65,6 @@ void clear(Vector* vector);
 bool expand_capacity(Vector* vector, int new_capacity);
 
 //Print the vector's info, used for debugging
-void dump(Vector* vector);
+void dump(const Vector* vector);
 
 #endif

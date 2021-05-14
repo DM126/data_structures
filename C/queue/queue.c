@@ -28,7 +28,7 @@ void delete_queue(Queue* queue)
 	}
 }
 
-Queue* copy_queue(Queue* other)
+Queue* copy_queue(const Queue* other)
 {
 	if (other == NULL)
 	{
@@ -116,7 +116,7 @@ int dequeue(Queue* queue)
 	return value;
 }
 
-int peek(Queue* queue)
+int peek(const Queue* queue)
 {
 	if (queue == NULL)
 	{
@@ -130,7 +130,7 @@ int peek(Queue* queue)
 	return queue->head->data;
 }
 
-bool isEmpty(Queue* queue)
+bool isEmpty(const Queue* queue)
 {
 	return queue == NULL || queue->size == 0;
 }
@@ -148,7 +148,7 @@ void clear(Queue* queue)
 	queue->tail = NULL;
 }
 
-void dump(Queue* queue)
+void dump(const Queue* queue)
 {
 	if (queue == NULL)
 	{

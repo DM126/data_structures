@@ -21,13 +21,13 @@ Node* new_node(int value);
 void delete_node(Node* node);
 
 //Performs a deep copy of a node and all of its children
-Node* copy_node(Node* node);
+Node* copy_node(const Node* node);
 
 //Inserts a value into one of the nodes children
 bool insert_node(Node* node, int value);
 
 //Searches for a node with the given value
-bool find_node(Node* node, int value);
+bool find_node(const Node* node, int value);
 
 //Searches for and removes the node with the given value.
 //Moves the right child node up into its place.
@@ -42,8 +42,8 @@ int swap_minimum(Node* node, Node* parent);
 //does an recursive inorder traversal of the subtree, adding items to the array as it goes
 //Current is the number of items currently in the array
 //Returns the new current value after adding from subtree
-int inorder_node(Node* node, int* array, int current);
-int preorder_node(Node* node, int* array, int current);
-int postorder_node(Node* node, int* array, int current);
+int inorder_node(const Node* node, int* array, int current);
+int preorder_node(const Node* node, int* array, int current);
+int postorder_node(const Node* node, int* array, int current);
 
 #endif

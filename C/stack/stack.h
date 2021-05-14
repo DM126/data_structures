@@ -25,7 +25,7 @@ Stack* new_stack_with_capacity(int initial_capacity);
 void delete_stack(Stack* stack);
 
 //Returns a deep copy of the stack
-Stack* copy_stack(Stack* other);
+Stack* copy_stack(const Stack* other);
 
 
 //Adds a value to the stack.
@@ -39,13 +39,13 @@ int pop(Stack* stack);
 
 //Returns the value on top of the stack, without removing it.
 //Exits program if stack is null or empty.
-int peek(Stack* stack);
+int peek(const Stack* stack);
 
 //Returns true if the stack is null or has no items TODO NULL?
-bool isEmpty(Stack* stack);
+bool isEmpty(const Stack* stack);
 
 //Returns true if the stack's size is equal to its capacity TODO NULL?
-bool isFull(Stack* stack);
+bool isFull(const Stack* stack);
 
 //Removes all items from the stack.
 //Exits the program if the stack is null.
@@ -57,6 +57,6 @@ void clear(Stack* stack);
 bool expand_capacity(Stack* stack, int new_capacity);
 
 //Print the stack's info, used for debugging
-void dump(Stack* stack);
+void dump(const Stack* stack);
 
 #endif

@@ -39,7 +39,7 @@ void delete_stack(Stack* stack)
 	}
 }
 
-Stack* copy_stack(Stack* other)
+Stack* copy_stack(const Stack* other)
 {
 	if (other == NULL)
 	{
@@ -92,7 +92,7 @@ int pop(Stack* stack)
 	return stack->array[stack->size];
 }
 
-int peek(Stack* stack)
+int peek(const Stack* stack)
 {
 	if (stack == NULL)
 	{
@@ -106,12 +106,12 @@ int peek(Stack* stack)
 	return stack->array[stack->size - 1];
 }
 
-bool isEmpty(Stack* stack)
+bool isEmpty(const Stack* stack)
 {
 	return stack == NULL || stack->size == 0;
 }
 
-bool isFull(Stack* stack)
+bool isFull(const Stack* stack)
 {
 	return stack != NULL && stack->size == stack->capacity;
 }
@@ -163,7 +163,7 @@ bool expand_capacity(Stack* stack, int new_capacity)
 	return true;
 }
 
-void dump(Stack* stack)
+void dump(const Stack* stack)
 {
 	if (stack == NULL)
 	{

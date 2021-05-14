@@ -47,7 +47,7 @@ void delete_vector(Vector* vector)
 	}
 }
 
-Vector* copy_vector(Vector* other)
+Vector* copy_vector(const Vector* other)
 {
 	if (other == NULL)
 	{
@@ -180,7 +180,7 @@ static int remove_item(Vector* vector, int index)
 	return value;
 }
 
-int get_index(Vector* vector, int index)
+int get_index(const Vector* vector, int index)
 {
 	if (vector == NULL)
 	{
@@ -194,22 +194,22 @@ int get_index(Vector* vector, int index)
 	return vector->array[index];
 }
 
-int get_back(Vector* vector)
+int get_back(const Vector* vector)
 {
 	return get_index(vector, vector->size - 1);
 }
 
-int get_front(Vector* vector)
+int get_front(const Vector* vector)
 {
 	return get_index(vector, 0);
 }
 
-bool isEmpty(Vector* vector)
+bool isEmpty(const Vector* vector)
 {
 	return vector == NULL || vector->size == 0;
 }
 
-bool isFull(Vector* vector)
+bool isFull(const Vector* vector)
 {
 	return vector != NULL && vector->size == vector->capacity;
 }
@@ -261,7 +261,7 @@ bool expand_capacity(Vector* vector, int new_capacity)
 	return true;
 }
 
-void dump(Vector* vector)
+void dump(const Vector* vector)
 {
 	if (vector == NULL)
 	{

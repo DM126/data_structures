@@ -67,7 +67,7 @@ bool insert(Tree* tree, int value)
 	return inserted;
 }
 
-bool find(Tree* tree, int value)
+bool find(const Tree* tree, int value)
 {
 	if (tree == NULL)
 	{
@@ -125,7 +125,7 @@ bool delete(Tree* tree, int value)
 	return removed;
 }
 
-int peek(Tree* tree)
+int peek(const Tree* tree)
 {
 	if (tree == NULL)
 	{
@@ -139,7 +139,7 @@ int peek(Tree* tree)
 	return tree->root->data;
 }
 
-bool isEmpty(Tree* tree)
+bool isEmpty(const Tree* tree)
 {
 	return tree == NULL || tree->size == 0;
 }
@@ -157,7 +157,7 @@ void clear(Tree* tree)
 }
 
 
-int* inorder(Tree* tree)
+int* inorder(const Tree* tree)
 {
 	if (tree == NULL || isEmpty(tree))
 	{
@@ -174,7 +174,7 @@ int* inorder(Tree* tree)
 	return array;
 }
 
-int* preorder(Tree* tree)
+int* preorder(const Tree* tree)
 {
 	if (tree == NULL || isEmpty(tree))
 	{
@@ -191,7 +191,7 @@ int* preorder(Tree* tree)
 	return array;
 }
 
-int* postorder(Tree* tree)
+int* postorder(const Tree* tree)
 {
 	if (tree == NULL || isEmpty(tree))
 	{
@@ -209,7 +209,7 @@ int* postorder(Tree* tree)
 }
 
 //helper function for dump()
-static void inorder_dump(Node* node)
+static void inorder_dump(const Node* node)
 {
 	if (node != NULL)
 	{
@@ -221,7 +221,7 @@ static void inorder_dump(Node* node)
 	}
 }
 
-void dump(Tree* tree)
+void dump(const Tree* tree)
 {
 	if (tree == NULL)
 	{
