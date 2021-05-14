@@ -29,7 +29,7 @@ Tree* copy_tree(Tree* other);
 bool insert(Tree* tree, int value);
 
 //Returns true if the value exists in the tree
-bool search(Tree* tree, int value);
+bool find(Tree* tree, int value);
 
 //Removes a specific value from the tree, returns false if the value is not present
 bool delete(Tree* tree, int value);

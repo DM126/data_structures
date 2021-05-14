@@ -136,10 +136,10 @@ bool remove_node(Node* node, Node* parent, int value)
 		}
 		else //2 children
 		{
-			node->data = swap_minimum(node, parent);
+			node->data = swap_minimum(node->right, node);
+			return true;
 		}
 
-		//replace the node
 		if (parent->left == node)
 		{
 			parent->left = node_to_move_up;
@@ -204,6 +204,11 @@ int preorder_node(Node* node, int* array, int current)
 
 int postorder_node(Node* node, int* array, int current)
 {
+	if (node == NULL)
+	{
+		return current;
+	}
+
 	current = postorder_node(node->left, array, current);
 	current = postorder_node(node->right, array, current);
 	array[current] = node->data;

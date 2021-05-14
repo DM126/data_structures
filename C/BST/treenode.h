@@ -35,6 +35,8 @@ bool find_node(Node* node, int value);
 bool remove_node(Node* node, Node* parent, int value);
 
 //Finds the minimum value in a subtree, returns its value and removes its node
+//Node starts as the right child of the found node, 
+//but is used to keep track of current location
 int swap_minimum(Node* node, Node* parent);
 
 //does an recursive inorder traversal of the subtree, adding items to the array as it goes

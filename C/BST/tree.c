@@ -83,8 +83,45 @@ bool delete(Tree* tree, int value)
 		exit_with_error("remove - tree is null");
 	}
 
-	return remove_node(tree->root, NULL, value);
+	bool removed; //set to true if the node is found and removed
+	if (tree->root->data == value) //at the root
+	{
+		if (tree->root->left == NULL && tree->root->right == NULL)
+		{
+			free(tree->root);
+		}
+		else if (tree->root->left == NULL)
+		{
+			Node* temp = tree->root;
+			tree->root = tree->root->right;
+			temp->right = NULL;
+			free(temp);
+		}
+		else if (tree->root->right == NULL)
+		{
+			Node* temp = tree->root;
+			tree->root = tree->root->left;
+			temp->left = NULL;
+			free(temp);
+		}
+		else //2 children
+		{
+			swap_minimum(tree->root->right, tree->root);
+		}
 
+		removed = true;
+	}
+	else //search for the node
+	{
+		removed = remove_node(tree->root, NULL, value);
+	}
+
+	if (removed)
+	{
+		tree->size--;
+	}
+
+	return removed;
 }
 
 int peek(Tree* tree)
@@ -149,7 +186,7 @@ int* preorder(Tree* tree)
 		exit_with_error("preorder - out of memory");
 	}
 
-	inorder_node(tree->root, array, 0);
+	preorder_node(tree->root, array, 0);
 	return array;
 }
 
@@ -170,6 +207,18 @@ int* postorder(Tree* tree)
 	return array;
 }
 
+//helper function for dump()
+static void inorder_dump(Node* node)
+{
+	if (node != NULL)
+	{
+		printf("(");
+		inorder_dump(node->left);
+		printf("%d", node->data);
+		inorder_dump(node->right);
+		printf(")");
+	}
+}
 
 void dump(Tree* tree)
 {
@@ -183,8 +232,7 @@ void dump(Tree* tree)
 	}
 	else
 	{
-		//TODO
-
-		printf("size: %d\n", tree->size);
+		inorder_dump(tree->root);
+		printf("\nsize: %d\n", tree->size);
 	}
 }
