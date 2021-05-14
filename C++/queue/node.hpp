@@ -51,6 +51,8 @@ Node<T>& Node<T>::operator=(Node<T> rhs)
 {
 	data = rhs.data;
 	std::swap(next, rhs.next);
+
+	return *this;
 }
 
 #endif
