@@ -242,12 +242,12 @@ void Tree<T>::dump() const
 {
 	if (isEmpty())
 	{
-		printf("tree is empty.\n");
+		std::cout << "tree is empty." << std::endl;
 	}
 	else
 	{
 		root->dump();
-		printf("\nsize: %d\n", size);
+		std::cout << "\nsize: " << size << std::endl;
 	}
 }
 
