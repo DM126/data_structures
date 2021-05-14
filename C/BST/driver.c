@@ -17,6 +17,10 @@ int main()
 	Tree* tree = new_tree();
 	assert(isEmpty(tree));
 
+	//don't remove/find from an empty tree
+	assert(!find(tree, 10));
+	assert(!delete(tree, 10));
+
 	// insert(tree, 10);
 	// insert(tree, 20);
 	// delete(tree, 10);

@@ -74,6 +74,11 @@ bool find(const Tree* tree, int value)
 		exit_with_error("find - tree is null");
 	}
 
+	if (isEmpty(tree))
+	{
+		return false;
+	}
+
 	return find_node(tree->root, value);
 }
 
@@ -82,6 +87,11 @@ bool delete(Tree* tree, int value)
 	if (tree == NULL)
 	{
 		exit_with_error("remove - tree is null");
+	}
+
+	if (isEmpty(tree))
+	{
+		return false;
 	}
 
 	bool removed; //set to true if the node is found and removed
