@@ -19,7 +19,7 @@ Vector* new_vector(void)
 
 Vector* new_vector_with_capacity(int initial_capacity)
 {
-	Vector* vector = malloc(sizeof(vector));
+	Vector* vector = malloc(sizeof(Vector));
 	if (vector == NULL)
 	{
 		exit_with_error("new_vector - Out of memory");
