@@ -71,7 +71,7 @@ Tree<T>::Tree(const Tree& other)
 
 	if (!other.isEmpty())
 	{
-		*root = *other.root;
+		root = new Node<T>(*other.root);
 	}
 }
 

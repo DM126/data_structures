@@ -41,6 +41,9 @@ public:
 	T data;
 	Node* left;
 	Node* right;
+
+private:
+	Node<T>* copyNode(const Node<T>* other);
 };
 
 template <typename T>
@@ -60,29 +63,14 @@ Node<T>::Node(const Node<T>& other)
 	
 	if (other.left != nullptr)
 	{
-		*left = *other.left;
+		left = new Node<T>(*other.left);
 	}
 
 	if (other.right != nullptr)
 	{
-		*right = *other.right;
+		right = new Node<T>(*other.right);
 	}
 }
-
-// template <typename T>
-// Node<T>* copyNode(const Node<T>* other)
-// {
-// 	if (other == nullptr)
-// 	{
-// 		return nullptr;
-// 	}
-
-// 	Node<T>* node = new Node<T>(other->data);
-// 	node->left = copyNode(other->left);
-// 	node->right = copyNode(other->right);
-
-// 	return node;
-// }
 
 template <typename T>
 Node<T>::~Node()

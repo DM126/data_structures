@@ -58,7 +58,40 @@ int main()
 		assert(inorder_vec[i] == i);
 	}
 
-	full_dump(tree);
+	//TODO
+
+	//test copy
+	Tree<int> copytree = tree;
+	assert(tree.peek() == copytree.peek());
+	assert(tree.getSize() == copytree.getSize());
+	assert(tree.preorder() == copytree.preorder());
+	copytree.remove(0);
+	assert(tree.peek() == 0);
+	copytree.clear();
+	tree.insert(10);
+	assert(tree.peek() != 10);
+
+	//test other traversals
+	//tree will look like this:
+	//      3
+	//  1       5
+	//0   2   4   6
+	std::vector<int> pre = {3, 1, 0, 2, 5, 4, 6};
+	std::vector<int> post = {0, 2, 1, 4, 6, 5, 3};
+	tree.clear();
+	tree.insert(3);
+	tree.insert(5);
+	tree.insert(6);
+	tree.insert(4);
+	tree.insert(1);
+	tree.insert(2);
+	tree.insert(0);
+
+	std::vector<int> preorder_array = tree.preorder();
+	std::vector<int> postorder_array = tree.postorder();
+
+	assert(pre == preorder_array);
+	assert(post == postorder_array);
 
 	std::cout << "All tests ran successfully!" << std::endl;
 	return 0;
