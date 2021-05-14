@@ -114,13 +114,57 @@ bool Tree<T>::find(const T& value) const
 		return false;
 	}
 
-	return root.find(value);
+	return root->find(value);
 }
 
 template <typename T>
 bool Tree<T>::remove(const T& value)
 {
+	if (isEmpty())
+	{
+		return false;
+	}
 
+	bool removed; //set to true if the node is found and removed
+	if (root->data == value) //at the root
+	{
+		if (root->left == nullptr && root->right == nullptr)
+		{
+			delete root;
+			root = nullptr;
+		}
+		else if (root->left == nullptr)
+		{
+			Node<T>* temp = root;
+			root = root->right;
+			temp->right = nullptr;
+			delete temp;
+		}
+		else if (root->right == nullptr)
+		{
+			Node<T>* temp = root;
+			root = root->left;
+			temp->left = nullptr;
+			delete temp;
+		}
+		else //2 children
+		{
+			root->right->swap_minimum(root);
+		}
+
+		removed = true;
+	}
+	else //search for the node
+	{
+		removed = root->remove(nullptr, value);
+	}
+
+	if (removed)
+	{
+		size--;
+	}
+
+	return removed;
 }
 
 template <typename T>

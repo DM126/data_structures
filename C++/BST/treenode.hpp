@@ -95,7 +95,7 @@ bool Node<T>::insert(const T& value)
 	bool inserted = false;
 	if (value < this->data)
 	{
-		if (left == NULL)
+		if (left == nullptr)
 		{
 			left = new Node<T>(value);
 			inserted = true;
@@ -107,7 +107,7 @@ bool Node<T>::insert(const T& value)
 	}
 	else if (value > this->data)
 	{
-		if (right == NULL)
+		if (right == nullptr)
 		{
 			right = new Node<T>(value);
 			inserted = true;
@@ -127,13 +127,19 @@ bool Node<T>::find(const T& value) const
 	bool found;
 	if (value < this->data)
 	{
-		found = left->find(value);
+		if (left != nullptr)
+		{
+			found = left->find(value);
+		}
 	}
 	else if (value > this->data)
 	{
-		found = right->find(value);
+		if (right != nullptr)
+		{
+			found = right->find(value);
+		}
 	}
-	else //value == node->data
+	else //value == this->data
 	{
 		found = true;
 	}
@@ -144,13 +150,73 @@ bool Node<T>::find(const T& value) const
 template <typename T>
 bool Node<T>::remove(Node* parent, const T& value)
 {
+	bool removed;
+	if (value < this->data)
+	{
+		if (left != nullptr)
+		{
+			removed = left->remove(this, value);
+		}
+	}
+	else if (value > this->data)
+	{
+		if (right != nullptr)
+		{
+			removed = right->remove(this, value);
+		}
+	}
+	else //value == this->data
+	{
+		Node* node_to_move_up;
+		if (left == nullptr && right == nullptr)
+		{
+			node_to_move_up = nullptr;
+		}
+		else if (left == nullptr)
+		{
+			node_to_move_up = right;
+		}
+		else if (right == nullptr)
+		{
+			node_to_move_up = left;
+		}
+		else //2 children
+		{
+			data = right->swap_minimum(this);
+			return true;
+		}
 
+		if (parent->left == this)
+		{
+			parent->left = node_to_move_up;
+		}
+		else
+		{
+			parent->right = node_to_move_up;
+		}
+
+		//delete the removed node
+		left = nullptr;
+		right = nullptr;
+		delete this;
+
+		removed = true;
+	}
+
+	return removed;
 }
 
 template <typename T>
 T Node<T>::swap_minimum(Node* parent)
 {
-
+	if (left == nullptr)
+	{
+		int value = this->data;
+		remove(parent, data);
+		return value;
+	}
+	
+	return left->swap_minimum(this);
 }
 
 template <typename T>

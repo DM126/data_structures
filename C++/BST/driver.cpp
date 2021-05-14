@@ -14,6 +14,10 @@ int main()
 	Tree<int> tree;
 	assert(tree.isEmpty());
 
+	//don't remove/find from an empty tree
+	assert(!tree.find(10));
+	assert(!tree.remove(10));
+
 	// tree.insert(10);
 	// tree.insert(20);
 	// tree.delete(10);
@@ -58,7 +62,44 @@ int main()
 		assert(inorder_vec[i] == i);
 	}
 
-	//TODO
+	//remove middle item and re-insert
+	tree.remove(2);
+	tree.insert(2);
+	assert(tree.find(2));
+
+	inorder_vec = tree.inorder();
+	for (int i = 0; i < 6; i++)
+	{
+		assert(inorder_vec[i] == i);
+	}
+
+	tree.remove(0);
+	tree.remove(1);
+	assert(tree.peek() == 3);
+	inorder_vec = tree.inorder();
+	for (int i = 2; i < 6; i++)
+	{
+		assert(inorder_vec[i-2] == i);
+	}
+
+	assert(!tree.find(1));
+	assert(!tree.remove(0));
+
+	//test clear and re-inserting
+	tree.clear();
+	assert(tree.isEmpty());
+
+	for (int i = 0; i < 6; i++)
+	{
+		tree.insert(i);
+	}
+	assert(tree.peek() == 0);
+	assert(tree.getSize() == 6);
+	inorder_vec = tree.inorder();
+	for (int i = 0; i < 6; i++)
+	{
+		assert(inorder_vec[i] == i);
+	}
 
 	//test copy
 	Tree<int> copytree = tree;
