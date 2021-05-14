@@ -28,7 +28,7 @@ Node<T>::Node(const T& value)
 template <typename T>
 Node<T>::Node(const Node& other)
 {
-	data = other.value;
+	data = other.data;
 	
 	if (other.next == nullptr)
 	{
