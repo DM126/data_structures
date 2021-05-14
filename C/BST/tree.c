@@ -90,6 +90,7 @@ bool delete(Tree* tree, int value)
 		if (tree->root->left == NULL && tree->root->right == NULL)
 		{
 			free(tree->root);
+			tree->root = NULL;
 		}
 		else if (tree->root->left == NULL)
 		{
