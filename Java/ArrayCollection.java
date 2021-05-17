@@ -50,7 +50,15 @@ public abstract class ArrayCollection<T>
 		}
 	}
 
-	public boolean add(int index, T item)
+	/**
+	 * Add an item at the specified index. 
+	 * Pushes everything behind it back.
+	 * 
+	 * @param index the index to add the item to
+	 * @param item the item to add
+	 * @return true if the item was added
+	 */
+	protected boolean add(int index, T item)
 	{
 		if (index < 0 || index > size)
 		{
@@ -74,7 +82,14 @@ public abstract class ArrayCollection<T>
 		return true;
 	}
 
-	public T remove(int index)
+	/**
+	 * Remove the item at the specified index.
+	 * Pushes everything behind it forward.
+	 * 
+	 * @param index the index of the item to remove
+	 * @return the removed item
+	 */
+	protected T remove(int index)
 	{
 		if (isEmpty())
 		{
@@ -98,7 +113,13 @@ public abstract class ArrayCollection<T>
 		return item;
 	}
 
-	public T get(int index)
+	/**
+	 * Retrieve an item at the specified index, without removing it
+	 * 
+	 * @param index the index to get the item from
+	 * @return the item at the index
+	 */
+	protected T get(int index)
 	{
 		if (index < 0 || index >= size)
 		{
