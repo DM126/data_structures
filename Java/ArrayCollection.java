@@ -58,7 +58,7 @@ public abstract class ArrayCollection<T>
 	 * @param item the item to add
 	 * @return true if the item was added
 	 */
-	protected boolean add(int index, T item)
+	protected void add(int index, T item)
 	{
 		if (index < 0 || index > size)
 		{
@@ -78,8 +78,6 @@ public abstract class ArrayCollection<T>
 		}
 		array[index] = item;
 		size++;
-
-		return true;
 	}
 
 	/**
