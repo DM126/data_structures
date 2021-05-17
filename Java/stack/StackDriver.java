@@ -63,6 +63,7 @@ public class StackDriver
 			stack.push(i);
 		}
 		Stack<Integer> copystack = new Stack<Integer>(stack);
+		assert stack.equals(copystack);
 		assert stack.getSize() == copystack.getSize();
 		assert stack.peek() == copystack.peek();
 		stack.pop();
