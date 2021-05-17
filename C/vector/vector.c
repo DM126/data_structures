@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "vector.h"
+#include "../array_util.h"
 #include "../error.h"
 
 //Generic functions to do adding and removing logic.
@@ -32,13 +34,7 @@ Vector* new_vector_with_capacity(int initial_capacity)
 
 	vector->size = 0;
 	vector->capacity = initial_capacity;
-
-	vector->array = malloc(sizeof(int) * vector->capacity);
-	if (vector->array == NULL)
-	{
-		free(vector);
-		exit_with_error("new_vector - Out of memory");
-	}
+	vector->array = create_array(vector->capacity);
 
 	return vector;
 }
@@ -62,10 +58,7 @@ Vector* copy_vector(const Vector* other)
 	Vector* vector = new_vector_with_capacity(other->capacity);
 
 	vector->size = other->size;
-	for (int i = 0; i < vector->size; i++)
-	{
-		vector->array[i] = other->array[i];
-	}
+	memcpy(vector->array, other->array, other->size * sizeof(int));
 
 	return vector;
 }
@@ -244,19 +237,7 @@ bool expand_capacity(Vector* vector, int new_capacity)
 		return false;
 	}
 
-	//make the new array
-	int* new_array = malloc(sizeof(int) * new_capacity);
-	if (new_array == NULL)
-	{
-		delete_vector(vector);
-		exit_with_error("expand_capacity - Out of memory");
-	}
-
-	//copy the values over
-	for (int i = 0; i < vector->size; i++)
-	{
-		new_array[i] = vector->array[i];
-	}
+	int* new_array = copy_array(vector->array, vector->size, new_capacity);
 
 	//replace the old array
 	free(vector->array);
@@ -274,10 +255,5 @@ void dump(const Vector* vector)
 		return;
 	}
 
-	for (int i = 0; i < vector->size; i++)
-	{
-		printf("%d: %d\n", i, vector->array[i]);
-	}
-	printf("size: %d\n", vector->size);
-	printf("capacity: %d\n", vector->capacity);
+	print_array(vector->array, vector->size, vector->capacity);
 }

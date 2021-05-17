@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "stack.h"
+#include "../array_util.h"
 #include "../error.h"
 
 Stack* new_stack(void)
@@ -24,13 +26,7 @@ Stack* new_stack_with_capacity(int initial_capacity)
 
 	stack->size = 0;
 	stack->capacity = initial_capacity;
-
-	stack->array = malloc(sizeof(int) * stack->capacity);
-	if (stack->array == NULL)
-	{
-		free(stack);
-		exit_with_error("new_stack - Out of memory");
-	}
+	stack->array = create_array(stack->capacity);
 
 	return stack;
 }
@@ -54,10 +50,7 @@ Stack* copy_stack(const Stack* other)
 	Stack* stack = new_stack_with_capacity(other->capacity);
 
 	stack->size = other->size;
-	for (int i = 0; i < stack->size; i++)
-	{
-		stack->array[i] = other->array[i];
-	}
+	memcpy(stack->array, other->array, other->size * sizeof(int));
 
 	return stack;
 }
@@ -146,19 +139,7 @@ bool expand_capacity(Stack* stack, int new_capacity)
 		return false;
 	}
 
-	//make the new array
-	int* new_array = malloc(sizeof(int) * new_capacity);
-	if (new_array == NULL)
-	{
-		delete_stack(stack);
-		exit_with_error("expand_capacity - Out of memory");
-	}
-
-	//copy the values over
-	for (int i = 0; i < stack->size; i++)
-	{
-		new_array[i] = stack->array[i];
-	}
+	int* new_array = copy_array(stack->array, stack->size, new_capacity);
 
 	//replace the old array
 	free(stack->array);
@@ -176,10 +157,5 @@ void dump(const Stack* stack)
 		return;
 	}
 
-	for (int i = 0; i < stack->size; i++)
-	{
-		printf("%d: %d\n", i, stack->array[i]);
-	}
-	printf("size: %d\n", stack->size);
-	printf("capacity: %d\n", stack->capacity);
+	print_array(stack->array, stack->size, stack->capacity);
 }
