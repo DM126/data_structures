@@ -1,5 +1,8 @@
 import java.util.*;
 
+/**
+ * Array implementation of a stack
+ */
 public class Stack<T>
 {
 	private T[] array;
@@ -144,7 +147,10 @@ public class Stack<T>
 	public void expandCapacity(int newCapacity)
 	{
 		//TODO what if new capacity < old?
-		if (newCapacity <= getCapacity());
+		if (newCapacity <= getCapacity())
+		{
+			return;
+		}
 
 		T[] newArray = (T[]) new Object[newCapacity];
 		for (int i = 0; i < size; i++)
