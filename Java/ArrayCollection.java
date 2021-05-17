@@ -56,7 +56,6 @@ public abstract class ArrayCollection<T>
 	 * 
 	 * @param index the index to add the item to
 	 * @param item the item to add
-	 * @return true if the item was added
 	 */
 	protected void add(int index, T item)
 	{
