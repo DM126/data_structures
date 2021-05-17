@@ -1,3 +1,5 @@
+import java.util.*;
+
 public abstract class ArrayCollection<T>
 {
 	protected T[] array;
@@ -46,6 +48,64 @@ public abstract class ArrayCollection<T>
 		{
 			array[i] = other.array[i];
 		}
+	}
+
+	public boolean add(int index, T item)
+	{
+		if (index < 0 || index > size)
+		{
+			throw new IllegalArgumentException("Index is out of bounds: " + index);
+		}
+
+		//double the capacity if full
+		if (isFull())
+		{
+			expandCapacity(getCapacity() * 2);
+		}
+
+		//push everything back
+		for (int i = size; i > index; i--)
+		{
+			array[i] = array[i-1];
+		}
+		array[index] = item;
+		size++;
+
+		return true;
+	}
+
+	public T remove(int index)
+	{
+		if (isEmpty())
+		{
+			throw new NoSuchElementException("Collection is empty");
+		}
+		else if (index < 0 || index > size)
+		{
+			throw new IllegalArgumentException("Index is out of bounds: " + index);
+		}
+
+		T item = array[index];
+
+		//move everything forward
+		for (int i = index; i < size - 1; i++)
+		{
+			array[i] = array[i+1];
+		}
+
+		size--;
+
+		return item;
+	}
+
+	public T get(int index)
+	{
+		if (index < 0 || index >= size)
+		{
+			throw new IllegalArgumentException("Index is out of bounds: " + index);
+		}
+
+		return array[index];
 	}
 
 	/**

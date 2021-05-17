@@ -38,13 +38,7 @@ public class Stack<T> extends ArrayCollection<T>
 	 */
 	public void push(T item)
 	{
-		if (isFull())
-		{
-			expandCapacity(array.length * 2);
-		}
-
-		array[size] = item;
-		size++;
+		add(size, item);
 	}
 
 	/**
@@ -55,14 +49,7 @@ public class Stack<T> extends ArrayCollection<T>
 	 */
 	public T pop()
 	{
-		if (isEmpty())
-		{
-			throw new EmptyStackException();
-		}
-
-		T item = array[size-1];
-		size--;
-		return item;
+		return remove(size - 1);
 	}
 
 	/**
@@ -71,12 +58,7 @@ public class Stack<T> extends ArrayCollection<T>
 	 */
 	public T peek()
 	{
-		if (isEmpty())
-		{
-			throw new EmptyStackException();
-		}
-
-		return array[size-1];
+		return get(size - 1);
 	}
 
 	@Override
