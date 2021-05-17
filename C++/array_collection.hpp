@@ -65,6 +65,11 @@ ArrayCollection<T>::ArrayCollection() : ArrayCollection(DEFAULT_CAPACITY) {}
 template <typename T>
 ArrayCollection<T>::ArrayCollection(int initial_capacity)
 {
+	if (initial_capacity <= 0)
+	{
+		throw std::invalid_argument("ArrayCollection(): capacity must be greater than 0");
+	}
+
 	size = 0;
 	capacity = initial_capacity;
 	array = new T[capacity];

@@ -11,6 +11,11 @@ Stack* new_stack(void)
 
 Stack* new_stack_with_capacity(int initial_capacity)
 {
+	if (initial_capacity <= 0)
+	{
+		exit_with_error("new_stack - Capacity must be greater than 0");
+	}
+
 	Stack* stack = malloc(sizeof(Stack));
 	if (stack == NULL)
 	{
