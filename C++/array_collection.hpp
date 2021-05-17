@@ -141,7 +141,7 @@ T ArrayCollection<T>::remove(int index)
 		throw std::out_of_range("ArrayCollection::remove(): index out of bounds: " + std::to_string(index));
 	}
 
-	int value = array[index];
+	T value = array[index];
 
 	//move everything forward
 	for (int i = index; i < size - 1; i++)
