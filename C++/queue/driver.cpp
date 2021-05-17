@@ -13,7 +13,7 @@ int main()
 	//test constructor
 	assert(queue.isEmpty());
 
-	//fill the queue
+	//add to the queue
 	for (int i = 0; i < 10; i++)
 	{
 		queue.enqueue(i);
@@ -21,16 +21,6 @@ int main()
 		assert(queue.getSize() == i+1);
 	}
 	assert(!queue.isEmpty());
-
-	//add one more to expand capacity
-	queue.enqueue(queue.getSize());
-	assert(!queue.isEmpty());
-	assert(queue.getSize() == 11);
-	//fill to new capacity
-	for (int i = 11; i < 20; i++)
-	{
-		queue.enqueue(i);
-	}
 
 	//test clear
 	queue.clear();
