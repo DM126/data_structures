@@ -211,7 +211,7 @@ T Node<T>::swap_minimum(Node* parent)
 {
 	if (left == nullptr)
 	{
-		int value = this->data;
+		T value = this->data;
 		remove(parent, data);
 		return value;
 	}
