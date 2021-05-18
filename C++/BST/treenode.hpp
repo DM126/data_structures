@@ -124,7 +124,7 @@ bool Node<T>::insert(const T& value)
 template <typename T>
 bool Node<T>::find(const T& value) const
 {
-	bool found;
+	bool found = false;
 	if (value < this->data)
 	{
 		if (left != nullptr)
@@ -150,7 +150,7 @@ bool Node<T>::find(const T& value) const
 template <typename T>
 bool Node<T>::remove(Node* parent, const T& value)
 {
-	bool removed;
+	bool removed = false;
 	if (value < this->data)
 	{
 		if (left != nullptr)
