@@ -47,3 +47,16 @@ void selection_sort(int* arr, int size)
 		}
 	}
 }
+
+void insertion_sort(int* arr, int size)
+{
+	for (int key = 1; key < size; key++)
+	{
+		int i = key;
+		while (i > 0 && arr[i] < arr[i-1])
+		{
+			swap(arr, i, i-1);
+			i--;
+		}
+	}
+}
