@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "sorting.h"
 
 void swap(int* arr, int i1, int i2)
 {
@@ -59,4 +60,64 @@ void insertion_sort(int* arr, int size)
 			i--;
 		}
 	}
+}
+
+//merge sort functions:
+static void merge(int* arr, int left, int mid, int right)
+{
+	int temp[right - left + 1];
+
+	int li = left; //left index
+	int ri = mid + 1; //right index
+	int ti = 0; //temp array index
+	while (li <= mid && ri <= right)
+	{
+		if (arr[li] <= arr[ri])
+		{
+			temp[ti] = arr[li];
+			li++;
+		}
+		else
+		{
+			temp[ti] = arr[ri];
+			ri++;
+		}
+
+		ti++;
+	}
+
+	while (li <= mid)
+	{
+		temp[ti] = arr[li];
+		ti++;
+		li++;
+	}
+
+	while (ri <= right)
+	{
+		temp[ti] = arr[ri];
+		ti++;
+		ri++;
+	}
+
+	for (int i = left; i <= right; i++)
+	{
+		arr[i] = temp[i - left];
+	}
+}
+
+static void merge_half(int* arr, int left, int right)
+{
+	if (right > left)
+	{
+		int mid = left + (right - left) / 2;
+		merge_half(arr, left, mid);
+		merge_half(arr, mid + 1, right);
+		merge(arr, left, mid, right);
+	}
+}
+
+void merge_sort(int* arr, int size)
+{
+	merge_half(arr, 0, size-1);
 }

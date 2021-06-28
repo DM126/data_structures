@@ -21,6 +21,7 @@ int main()
 	test_sort(bubble_sort, "bubble sort");
 	test_sort(selection_sort, "selection sort");
 	test_sort(insertion_sort, "insertion sort");
+	test_sort(merge_sort, "merge sort");
 
 	printf("All tests ran successfully!\n");
 
