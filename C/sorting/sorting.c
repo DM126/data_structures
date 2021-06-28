@@ -20,10 +20,30 @@ void bubble_sort(int* arr, int size)
 				swapped = true;
 			}
 		}
-		
+
 		if (!swapped)
 		{
 			break;
+		}
+	}
+}
+
+void selection_sort(int* arr, int size)
+{
+	for (int begin = 0; begin < size - 1; begin++)
+	{
+		int min_index = begin;
+		for (int i = begin + 1; i < size; i++)
+		{
+			if (arr[i] < arr[min_index])
+			{
+				min_index = i;
+			}
+		}
+
+		if (begin != min_index)
+		{
+			swap(arr, begin, min_index);
 		}
 	}
 }
