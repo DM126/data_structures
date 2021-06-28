@@ -12,23 +12,16 @@ int* random_array(int size);
 //checks to see if the array is sorted
 bool check_array(int* arr, int size);
 
+//tests a sorting algorithm, which is passed as a function pointer
+//name is the name of the sorting algorithm, printed for debugging
+void test_sort(void (*fptr)(int*, int), char* name);
+
 int main()
 {
-	int size = 100;
-	int* arr = random_array(size);
-
-	bubble_sort(arr, size);
-
-	// for (int i = 0; i < size; i++)
-	// {
-	// 	printf("%d\n", arr[i]);
-	// }
-
-	assert(check_array(arr, size));
+	test_sort(bubble_sort, "bubble sort");
+	test_sort(selection_sort, "selection sort");
 
 	printf("All tests ran successfully!\n");
-
-	free(arr);
 
 	return 0;
 }
@@ -60,4 +53,24 @@ bool check_array(int* arr, int size)
 	}
 
 	return true;
+}
+
+void test_sort(void (*sort_fptr)(int*, int), char* name)
+{
+	printf("Testing %s\n", name);
+
+	int size = 100;
+	int* arr = random_array(size);
+
+	sort_fptr(arr, size);
+
+	//Used for debugging
+	// for (int i = 0; i < size; i++)
+	// {
+	// 	printf("%d\n", arr[i]);
+	// }
+
+	assert(check_array(arr, size));
+	
+	free(arr);
 }
