@@ -62,6 +62,7 @@ void insertion_sort(int* arr, int size)
 	}
 }
 
+
 //merge sort functions:
 static void merge(int* arr, int left, int mid, int right)
 {
@@ -122,6 +123,8 @@ void merge_sort(int* arr, int size)
 	merge_half(arr, 0, size-1);
 }
 
+
+//quicksort functions:
 //returns pivot index
 //adapted from CLRS book
 static int partition(int* arr, int start, int end)
@@ -159,8 +162,52 @@ static void quicksort_recursive(int* arr, int start, int end)
 	}
 }
 
-//picks first element as pivot
 void quicksort(int* arr, int size)
 {
 	quicksort_recursive(arr, 0, size-1);
+}
+
+
+//heapsort functions:
+//i is the index to bubble down to the correct position
+static void heapify(int* arr, int size, int i)
+{
+	int left = 2 * i + 1;
+	if (left < size)
+	{
+		int right = 2 * i + 2;
+		int largest;
+		if (right < size)
+		{
+			largest = (arr[left] > arr[right]) ? left : right;
+		}
+		else
+		{
+			largest = left;
+		}
+
+		if (arr[i] < arr[largest])
+		{
+			swap(arr, i, largest);
+			heapify(arr, size, largest);
+		}
+	}
+}
+
+static void build_max_heap(int* arr, int size)
+{
+	for (int i = size/2 - 1; i >= 0; i--)
+	{
+		heapify(arr, size, i);
+	}
+}
+
+void heapsort(int* arr, int size)
+{
+	build_max_heap(arr, size);
+	for (int i = size - 1; i > 0; i--)
+	{
+		swap(arr, 0, i);
+		heapify(arr, i, 0);
+	}
 }

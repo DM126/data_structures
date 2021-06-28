@@ -23,6 +23,7 @@ int main()
 	test_sort(insertion_sort, "insertion sort");
 	test_sort(merge_sort, "merge sort");
 	test_sort(quicksort, "quicksort");
+	test_sort(heapsort, "heapsort");
 
 	printf("All tests ran successfully!\n");
 
@@ -64,6 +65,13 @@ void test_sort(void (*sort_fptr)(int*, int), char* name)
 
 	int size = 100;
 	int* arr = random_array(size);
+
+	//Used for debugging
+	// for (int i = 0; i < size; i++)
+	// {
+	// 	printf("%d\n", arr[i]);
+	// }
+	// pritnf("\n");
 
 	sort_fptr(arr, size);
 
