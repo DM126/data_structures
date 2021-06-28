@@ -121,3 +121,46 @@ void merge_sort(int* arr, int size)
 {
 	merge_half(arr, 0, size-1);
 }
+
+//returns pivot index
+//adapted from CLRS book
+static int partition(int* arr, int start, int end)
+{
+	//select last index as pivot
+	int pivot = arr[end];
+	int i = start - 1;
+
+	for (int j = start; j <= end - 1; j++)
+	{
+		if (arr[j] <= pivot)
+		{
+			i++;
+			swap(arr, i, j);
+		}
+	}
+
+	swap(arr, i+1, end);
+
+	return i + 1;
+}
+
+//Called by quicksort(), not by user.
+//User should only need to provide the array, not the start/end bounds.
+static void quicksort_recursive(int* arr, int start, int end)
+{
+	int pivot;
+
+	if (start < end)
+	{
+		pivot = partition(arr, start, end);
+
+		quicksort_recursive(arr, start, pivot - 1);
+		quicksort_recursive(arr, pivot + 1, end);
+	}
+}
+
+//picks first element as pivot
+void quicksort(int* arr, int size)
+{
+	quicksort_recursive(arr, 0, size-1);
+}
