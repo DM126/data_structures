@@ -24,6 +24,7 @@ int main()
 	test_sort(merge_sort, "merge sort");
 	test_sort(quicksort, "quicksort");
 	test_sort(heapsort, "heapsort");
+	test_sort(counting_sort, "counting sort");
 
 	printf("All tests ran successfully!\n");
 
@@ -71,7 +72,7 @@ void test_sort(void (*sort_fptr)(int*, int), char* name)
 	// {
 	// 	printf("%d\n", arr[i]);
 	// }
-	// pritnf("\n");
+	// printf("\n");
 
 	sort_fptr(arr, size);
 

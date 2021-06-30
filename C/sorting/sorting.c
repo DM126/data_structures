@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdlib.h>
 #include "sorting.h"
 
 void swap(int* arr, int i1, int i2)
@@ -210,4 +211,39 @@ void heapsort(int* arr, int size)
 		swap(arr, 0, i);
 		heapify(arr, i, 0);
 	}
+}
+
+
+void counting_sort(int* arr, int size)
+{
+	//initialize counts to 0
+	int *counts = malloc(size*sizeof(int));
+	for (int i = 0; i < size; i++)
+	{
+		counts[i] = 0;
+	}
+
+	//count instances of each value
+	for (int i = 0; i < size; i++)
+	{
+		counts[arr[i]]++;
+	}
+
+	//determine indices in output
+	for (int i = 1; i < size; i++)
+	{
+		counts[i] += counts[i-1];
+	}
+
+	//place the values in order
+	for (int i = size - 1; i >= 0; i--)
+	{
+		while (counts[i] > counts[i-1] || (i == 0 && counts[0] > 0))
+		{
+			counts[i]--;
+			arr[counts[i]] = i;
+		}
+	}
+
+	free(counts);
 }
