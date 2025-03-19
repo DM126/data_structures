@@ -1,13 +1,13 @@
-public class Node<T>
+public class LinkedNode<T>
 {
 	private T data;
-	private Node<T> next;
+	private LinkedNode<T> next;
 
 	/**
 	 * Creates a node
 	 * @param item the data for the node to hold
 	 */
-	public Node(T item)
+	public LinkedNode(T item)
 	{
 		data = item;
 		next = null;
@@ -17,10 +17,10 @@ public class Node<T>
 	 * Copies a node
 	 * @param other the node to copy
 	 */
-	public Node(Node<T> other)
+	public LinkedNode(LinkedNode<T> other)
 	{
 		data = other.data;
-		next = new Node<T>(other.next);
+		next = new LinkedNode<>(other.next);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class Node<T>
 	/**
 	 * @return the next node
 	 */
-	public Node<T> getNext()
+	public LinkedNode<T> getNext()
 	{
 		return next;
 	}
@@ -53,7 +53,7 @@ public class Node<T>
 	 * Sets the next node after this one
 	 * @param newNext the node to connect this node to
 	 */
-	public void setNext(Node<T> newNext)
+	public void setNext(LinkedNode<T> newNext)
 	{
 		next = newNext;
 	}
@@ -77,12 +77,12 @@ public class Node<T>
 			return false;
 		}
 
-		if (!(other instanceof Node<?>))
+		if (!(other instanceof LinkedNode<?>))
 		{
 			return false;
 		}
 
-		if (!data.equals(((Node<?>)other).data))
+		if (!data.equals(((LinkedNode<?>)other).data))
 		{
 			return false;
 		}

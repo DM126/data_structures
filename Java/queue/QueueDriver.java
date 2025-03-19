@@ -2,7 +2,7 @@ public class QueueDriver
 {
 	public static void main(String[] args)
 	{
-		Queue<Integer> queue = new Queue<Integer>();
+		Queue<Integer> queue = new Queue<>();
 
 		//test constructor
 		assert queue.isEmpty();
@@ -48,12 +48,12 @@ public class QueueDriver
 		{
 			queue.enqueue(i);
 		}
-		Queue<Integer> copyqueue = new Queue<Integer>(queue);
+		Queue<Integer> copyqueue = new Queue<>(queue);
 		assert queue.equals(copyqueue);
 		assert queue.getSize() == copyqueue.getSize();
-		assert queue.peek() == copyqueue.peek();
+		assert queue.peek().equals(copyqueue.peek());
 		queue.dequeue();
-		assert queue.peek() != copyqueue.peek();
+		assert !queue.peek().equals(copyqueue.peek());
 		assert queue.getSize() != copyqueue.getSize();
 		copyqueue.enqueue(5);
 		copyqueue.dequeue();
