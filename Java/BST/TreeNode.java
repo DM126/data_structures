@@ -1,6 +1,4 @@
-package BST;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class TreeNode<T extends Comparable<T>>
 {
@@ -33,12 +31,12 @@ public class TreeNode<T extends Comparable<T>>
 
 		if (other.left != null)
 		{
-			left = new TreeNode<T>(other.left);
+			left = new TreeNode<>(other.left);
 		}
 
 		if (other.right != null)
 		{
-			left = new TreeNode<T>(other.right);
+			left = new TreeNode<>(other.right);
 		}
 	}
 
@@ -55,7 +53,7 @@ public class TreeNode<T extends Comparable<T>>
 		{
 			if (left == null)
 			{
-				left = new TreeNode<T>(item);
+				left = new TreeNode<>(item);
 				inserted = true;
 			}
 			else
@@ -67,7 +65,7 @@ public class TreeNode<T extends Comparable<T>>
 		{
 			if (right == null)
 			{
-				right = new TreeNode<T>(item);
+				right = new TreeNode<>(item);
 				inserted = true;
 			}
 			else
@@ -136,18 +134,18 @@ public class TreeNode<T extends Comparable<T>>
 		}
 		else //item == this.data
 		{
-			TreeNode<T> node_to_move_up;
+			TreeNode<T> needToMoveUp;
 			if (left == null && right == null)
 			{
-				node_to_move_up = null;
+				needToMoveUp = null;
 			}
 			else if (left == null)
 			{
-				node_to_move_up = right;
+				needToMoveUp = right;
 			}
 			else if (right == null)
 			{
-				node_to_move_up = left;
+				needToMoveUp = left;
 			}
 			else //2 children
 			{
@@ -157,11 +155,11 @@ public class TreeNode<T extends Comparable<T>>
 
 			if (parent.left == this)
 			{
-				parent.left = node_to_move_up;
+				parent.left = needToMoveUp;
 			}
 			else
 			{
-				parent.right = node_to_move_up;
+				parent.right = needToMoveUp;
 			}
 
 			removed = true;
@@ -248,7 +246,7 @@ public class TreeNode<T extends Comparable<T>>
 	 * 
 	 * @param items the list to add the items to
 	 */
-	public void inorder(ArrayList<T> items)
+	public void inorder(List<T> items)
 	{
 		if (left != null)
 		{
@@ -268,7 +266,7 @@ public class TreeNode<T extends Comparable<T>>
 	 * 
 	 * @param items the list to add the items to
 	 */
-	public void preorder(ArrayList<T> items)
+	public void preorder(List<T> items)
 	{
 		items.add(data);
 
@@ -288,7 +286,7 @@ public class TreeNode<T extends Comparable<T>>
 	 * 
 	 * @param items the list to add the items to
 	 */
-	public void postorder(ArrayList<T> items)
+	public void postorder(List<T> items)
 	{
 		if (left != null)
 		{

@@ -1,5 +1,3 @@
-package BST;
-
 import java.util.*;
 
 public class Tree<T extends Comparable<T>>
@@ -23,7 +21,7 @@ public class Tree<T extends Comparable<T>>
 	 */
 	public Tree(Tree<T> other)
 	{
-		root = new TreeNode<T>(other.root);
+		root = new TreeNode<>(other.root);
 		size = other.size;
 	}
 
@@ -161,9 +159,9 @@ public class Tree<T extends Comparable<T>>
 	 * 
 	 * @return a list of items in inorder
 	 */
-	public ArrayList<T> inorder()
+	public List<T> inorder()
 	{
-		ArrayList<T> items = new ArrayList<T>(size);
+		List<T> items = new ArrayList<>(size);
 
 		if (!isEmpty())
 		{
@@ -178,9 +176,9 @@ public class Tree<T extends Comparable<T>>
 	 * 
 	 * @return a list of items in preorder
 	 */
-	public ArrayList<T> preorder()
+	public List<T> preorder()
 	{
-		ArrayList<T> items = new ArrayList<T>(size);
+		ArrayList<T> items = new ArrayList<>(size);
 
 		if (!isEmpty())
 		{
@@ -195,9 +193,9 @@ public class Tree<T extends Comparable<T>>
 	 * 
 	 * @return a list of items in postorder
 	 */
-	public ArrayList<T> postorder()
+	public List<T> postorder()
 	{
-		ArrayList<T> items = new ArrayList<T>(size);
+		List<T> items = new ArrayList<>(size);
 
 		if (!isEmpty())
 		{

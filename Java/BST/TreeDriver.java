@@ -1,13 +1,12 @@
-package BST;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class TreeDriver
 {
 	public static void main(String[] args)
 	{
-		Tree<Integer> tree = new Tree<Integer>();
+		Tree<Integer> tree = new Tree<>();
 		assert(tree.isEmpty());
 
 		//don't remove/find from an empty tree
@@ -50,7 +49,7 @@ public class TreeDriver
 		assert(tree.getSize() == 6);
 
 		//test inorder
-		ArrayList<Integer> inorderList = tree.inorder();
+		List<Integer> inorderList = tree.inorder();
 		for (int i = 0; i < 6; i++)
 		{
 			assert(inorderList.get(i) == i);
@@ -96,10 +95,10 @@ public class TreeDriver
 		}
 
 		//test copy
-		Tree<Integer> copytree = tree;
+		Tree<Integer> copytree = new Tree<>(tree);
 		assert(tree.peek() == copytree.peek());
 		assert(tree.getSize() == copytree.getSize());
-		assert(tree.preorder() == copytree.preorder());
+		assert(tree.preorder().equals(copytree.preorder()));
 		copytree.remove(0);
 		assert(tree.peek() == 0);
 		copytree.clear();
@@ -111,10 +110,10 @@ public class TreeDriver
 		//      3
 		//  1       5
 		//0   2   4   6
-		Integer pre_array[] = {3, 1, 0, 2, 5, 4, 6};
-		Integer post_array[] = {0, 2, 1, 4, 6, 5, 3};
-		ArrayList<Integer> pre = new ArrayList<Integer>(Arrays.asList(pre_array));
-		ArrayList<Integer> post = new ArrayList<Integer>(Arrays.asList(post_array));
+		Integer[] preArray = {3, 1, 0, 2, 5, 4, 6};
+		Integer[] postArray = {0, 2, 1, 4, 6, 5, 3};
+		List<Integer> pre = new ArrayList<>(Arrays.asList(preArray));
+		List<Integer> post = new ArrayList<>(Arrays.asList(postArray));
 		tree.clear();
 		tree.insert(3);
 		tree.insert(5);
@@ -124,16 +123,16 @@ public class TreeDriver
 		tree.insert(2);
 		tree.insert(0);
 
-		ArrayList<Integer> preorderList = tree.preorder();
-		ArrayList<Integer> postorderList = tree.postorder();
+		List<Integer> preorderList = tree.preorder();
+		List<Integer> postorderList = tree.postorder();
 
-		assert(pre == preorderList);
-		assert(post == postorderList);
+		assert(pre.equals(preorderList));
+		assert(post.equals(postorderList));
 
 		System.out.println("All tests ran successfully!");
 	}
 
-	static void printTraversalList(ArrayList<Integer> list)
+	static void printTraversalList(List<Integer> list)
 	{
 		for (int i = 0; i < list.size(); i++)
 		{
