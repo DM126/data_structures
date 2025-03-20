@@ -1,7 +1,12 @@
+
+/**
+ * Node for a doubly linked list.
+ */
 public class LinkedNode<T>
 {
 	private T data;
 	private LinkedNode<T> next;
+	private LinkedNode<T> previous;
 
 	/**
 	 * Creates a node
@@ -11,16 +16,7 @@ public class LinkedNode<T>
 	{
 		data = item;
 		next = null;
-	}
-
-	/**
-	 * Copies a node
-	 * @param other the node to copy
-	 */
-	public LinkedNode(LinkedNode<T> other)
-	{
-		data = other.data;
-		next = new LinkedNode<>(other.next);
+		previous = null;
 	}
 
 	/**
@@ -50,12 +46,32 @@ public class LinkedNode<T>
 	}
 
 	/**
-	 * Sets the next node after this one
+	 * Sets the next node after this one.
+	 * Will set the previous node of newNext to this node.
 	 * @param newNext the node to connect this node to
 	 */
 	public void setNext(LinkedNode<T> newNext)
 	{
 		next = newNext;
+		newNext.setPrevious(this);
+	}
+
+	/**
+	 * @return the previous node
+	 */
+	public LinkedNode<T> getPrevious()
+	{
+		return previous;
+	}
+
+	/**
+	 * Sets the node before this one.
+	 * Use setNext() for setting order of nodes.
+	 * @param newNext the node to connect this node to
+	 */
+	private void setPrevious(LinkedNode<T> newPrevious)
+	{
+		previous = newPrevious;
 	}
 
 	@Override

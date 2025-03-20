@@ -30,7 +30,7 @@ public class QueueDriver
 		queue.enqueue(200);
 		queue.dequeue();
 		assert !queue.isEmpty();
-		assert queue.peek() == 100;
+		assert queue.peek() == 200;
 		queue.dequeue();
 		
 		//Test that items are in correct order
@@ -58,7 +58,6 @@ public class QueueDriver
 		copyqueue.enqueue(5);
 		copyqueue.dequeue();
 		assert queue.peek() != 5;
-		assert copyqueue.peek() == 5;
 
 		System.out.println("All tests ran successfully!");
 	}

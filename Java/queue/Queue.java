@@ -1,5 +1,4 @@
 
-
 /**
  * Linked list implementation of a queue
  */

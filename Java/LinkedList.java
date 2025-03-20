@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 /**
- * Generic singly linked list. Certain methods are protected so child classes
+ * Generic doubly linked list. Certain methods are protected so child classes
  * can rename them in their API.
  */
 public abstract class LinkedList<T> {
@@ -29,6 +29,7 @@ public abstract class LinkedList<T> {
 	{
 		head = null;
 		tail = null;
+		size = 0;
 		LinkedNode<T> curr = other.head;
 		while (curr != null)
 		{
@@ -38,9 +39,9 @@ public abstract class LinkedList<T> {
 	}
 
 	/**
-	 * Adds an item to the end of the queue.
+	 * Adds an item to the end of the list.
 	 * 
-	 * @param item the item to add to the queue
+	 * @param item the item to add to the list
 	 */
 	protected void addBack(T item)
 	{
@@ -61,16 +62,39 @@ public abstract class LinkedList<T> {
 	}
 
 	/**
-	 * Returns and removes the item at the head of the queue
+	 * Adds an item to the end of the list.
+	 * 
+	 * @param item the item to add to the list
+	 */
+	protected void addFront(T item)
+	{
+		LinkedNode<T> newNode = new LinkedNode<>(item);
 
-	 * @return the item at the head of the queue
-	 * @throws NoSuchElementException if the queue is empty
+		if (isEmpty())
+		{
+			head = newNode;
+			tail = newNode;
+		}
+		else
+		{
+			newNode.setNext(head);
+			head = newNode;
+		}
+
+		size++;
+	}
+
+	/**
+	 * Returns and removes the item at the head of the list
+
+	 * @return the item at the head of the list
+	 * @throws NoSuchElementException if the list is empty
 	 */
 	protected T removeFront()
 	{
 		if (isEmpty())
 		{
-			throw new NoSuchElementException("Queue is empty");
+			throw new NoSuchElementException("List is empty");
 		}
 
 		T item = head.getData();
@@ -84,21 +108,58 @@ public abstract class LinkedList<T> {
 	}
 
 	/**
-	 * @return the item at the head of the list without removing it
-	 * @throws NoSuchElementException if the queue is empty
+	 * Returns and removes the item at the end of the list
+	 * 
+	 * @return the item at the end of the list
+	 * @throws NoSuchElementException if the list is empty
 	 */
-	public T peekFront()
+	protected T removeBack()
 	{
 		if (isEmpty())
 		{
-			throw new NoSuchElementException("Queue is empty");
+			throw new NoSuchElementException("List is empty");
+		}
+
+		T item = tail.getData();
+		tail = tail.getPrevious();
+		if (tail == null)
+		{
+			head = null;
+		}
+		size--;
+		return item;
+	}
+
+	/**
+	 * @return the item at the head of the list without removing it
+	 * @throws NoSuchElementException if the list is empty
+	 */
+	protected T peekFront()
+	{
+		if (isEmpty())
+		{
+			throw new NoSuchElementException("List is empty");
 		}
 
 		return head.getData();
 	}
 
 	/**
-	 * @return true if there are no items in the queue
+	 * @return the item on top of the stack without removing it
+	 * @throws NoSuchElementException if the queue is empty
+	 */
+	protected T peekBack()
+	{
+		if (isEmpty())
+		{
+			throw new NoSuchElementException("List is empty");
+		}
+
+		return tail.getData();
+	}
+
+	/**
+	 * @return true if there are no items in the list
 	 */
 	public boolean isEmpty()
 	{
@@ -106,7 +167,7 @@ public abstract class LinkedList<T> {
 	}
 
 	/**
-	 * @return the number of items in the queue
+	 * @return the number of items in the list
 	 */
 	public int getSize()
 	{
@@ -114,7 +175,7 @@ public abstract class LinkedList<T> {
 	}
 
 	/**
-	 * Removes all items from the queue
+	 * Removes all items from the list
 	 */
 	public void clear()
 	{
@@ -149,7 +210,7 @@ public abstract class LinkedList<T> {
 
 		LinkedNode<T> thisCurr = head;
 		LinkedNode<T> otherCurr = ((LinkedList<T>)other).head;
-		while (head != null)
+		while (thisCurr != null)
 		{
 			if (!thisCurr.equals(otherCurr))
 			{
