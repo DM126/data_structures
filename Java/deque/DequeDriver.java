@@ -2,7 +2,8 @@
 public class DequeDriver
 {
 	public static void main(String[] args)
-	{Deque<Integer> list = new Deque<>();
+	{
+		Deque<Integer> list = new Deque<>();
 
 		//test constructor
 		assert list.isEmpty();
